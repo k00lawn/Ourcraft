@@ -8,8 +8,16 @@
     "@testing-library/user-event": "^12.7.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-merge-refs": "^1.1.0",
     "react-scripts": "4.0.2",
-    "web-vitals": "^1.1.0"
+    "web-vitals": "^1.1.0",
+    "drei": "^1.4.0-alpha.0",
+    "nanoid": "^3.1.20",
+    "react-spring": "^8.0.27",
+    "react-three-fiber": "^4.2.21",
+    "three": "^0.120.1",
+    "use-cannon": "^0.5.0",
+    "zustand": "^3.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
