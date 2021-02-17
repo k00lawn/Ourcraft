@@ -1,0 +1,1 @@
+export { default as grass} from './grass.jpg'
