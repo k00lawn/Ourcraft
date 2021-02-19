@@ -1,4 +1,3 @@
-
 * {
   box-sizing: border-box;
 }
@@ -24,6 +23,43 @@ body {
   position: fixed;
   overflow: hidden;
   overscroll-behavior-y: none;
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
+    helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
   color: black;
+}
+
+.crossHair {
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  background-color: transparent;
+  /* position: absolute; */
+  /* left: 512px; */
+  /* top: 360px; */
+}
+.crossHair::after {
+  content: " ";
+  position: absolute;
+  display: block;
+  background-color: #fff;
+  opacity: 0.8;
+  height: 5px;
+  margin-top: -5px;
+  top: 58%;
+  left: 5px;
+  right: 5px;
+  z-index: 9;
+}
+.crossHair::before {
+  content: " ";
+  position: absolute;
+  display: block;
+  background-color: #fff;
+  opacity: 0.8;
+  width: 5px;
+  margin-left: -5px;
+  left: 57%;
+  top: 5px;
+  bottom: 5px;
+  z-index: 9;
 }

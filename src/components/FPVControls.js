@@ -15,10 +15,12 @@ export const FPVControls = (props) => {
   }, []);
 
   return (
-    <pointerLockControlsImpl
-      ref={controls}
-      args={[camera, gl.domElement]}
-      {...props}
-    />
+    <>
+      <pointerLockControlsImpl
+        ref={controls}
+        args={[camera, gl.domElement]}
+        {...props}
+      />
+    </>
   );
 };
