@@ -1,30 +1,18 @@
-import React from "react";
-import { Canvas } from "react-three-fiber";
-import { Sky } from "drei";
-import { Physics } from "use-cannon";
-import { Ground } from "./components/Ground";
-import Cubes from "./components/Cubes";
-import { Player } from "./components/Player";
-import { Hud } from "./components/Hud";
-import { Crosshair } from "./components/Crosshair";
+import React, { Component, Suspense, lazy } from 'react';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
-function App() {
+const App =() =>{
+
+  const PlayGround = lazy(() => import('../src/containers/PlayGround'));
+
   return (
-    <>
-      <Crosshair />
-      <Canvas shadowMap sRGB>
-        <Sky sunPosition={[100, 20, 100]} />
-        <ambientLight intensity={0.25} />
-        <pointLight castShadow intensity={0.7} position={[100, 100, 100]} />
-        <Hud position={[0, 0, -2]} />
-        <Physics gravity={[0, -30, 0]}>
-          <Ground position={[0, 0.5, 0]} />
-          <Player position={[0, 3, 10]} />
-          <Cubes />
-        </Physics>
-      </Canvas>
-    </>
-  );
+      <Router >
+      <Suspense fallback={<div className="loader centerLoader" />}>
+          <Switch>
+          <Route exact path="/" component={PlayGround} />
+          </Switch>
+        </Suspense>
+      </Router>
+  )
 }
-
 export default App;
