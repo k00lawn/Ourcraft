@@ -3,15 +3,15 @@ import { useBox } from "use-cannon";
 import { useState } from "react";
 import * as textures from "../textures";
 
-const Cube = ({ position, texture, addCube, removeCube }) => {
+const Cube = ({ position, texture, addCube, removeCube, id }) => {
   const [hover, setHover] = useState(null);
-
   const [ref] = useBox(() => ({
     type: "Static",
     position,
   }));
 
   const color = texture === "glass" ? "skyblue" : "white";
+
   return (
     <mesh
       castShadow

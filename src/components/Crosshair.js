@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-export const Crosshair = () => {
-  const x = `${window.innerWidth / 2 - 10}px`;
-  const y = `${window.innerHeight / 2 - 100}px`;
+export const Crosshair = (props) => {
+  const xC = `${props.x}px`;
+  const yC = `${props.y}px`;
 
   const position = {
     position: "absolute",
-    left: x,
-    top: y,
+    left: xC,
+    top: yC,
   };
 
   return <div className="crossHair" style={position}></div>;
