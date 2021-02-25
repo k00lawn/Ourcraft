@@ -27,6 +27,7 @@ const Cube = ({ position, texture, addCube, removeCube, id }) => {
         e.stopPropagation();
         const clickedFace = Math.floor(e.faceIndex / 2);
         const { x, y, z } = ref.current.position;
+
         if (clickedFace === 0) {
           e.altKey ? removeCube(x, y, z) : addCube(x + 1, y, z);
           return;
