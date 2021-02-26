@@ -1,9 +1,16 @@
 import React, { memo } from "react";
 import { useBox } from "use-cannon";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as textures from "../textures";
 
-const Cube = ({ position, texture, addCube, removeCube, id }) => {
+const Cube = ({
+  position,
+  texture,
+  addCube,
+  removeCube,
+  id,
+  onBlockPlaced,
+}) => {
   const [hover, setHover] = useState(null);
   const [ref] = useBox(() => ({
     type: "Static",
@@ -11,6 +18,10 @@ const Cube = ({ position, texture, addCube, removeCube, id }) => {
   }));
 
   const color = texture === "glass" ? "skyblue" : "white";
+
+  useEffect(() => {
+    onBlockPlaced(position, texture);
+  }, []);
 
   return (
     <mesh

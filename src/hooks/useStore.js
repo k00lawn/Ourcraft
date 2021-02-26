@@ -12,9 +12,10 @@ export const useStore = create((set) => ({
   addCube: (x, y, z) =>
     set((state) => ({
       block: (() =>
-        console.log(
-          `cube pos : ${x}, ${y}, ${z}} | cube texture : ${state.texture}`
-        ))(),
+        console
+          .log
+          // `cube pos : ${x}, ${y}, ${z}} | cube texture : ${state.texture}`
+          ())(),
       cubes: [
         ...state.cubes,
         { key: nanoid(), pos: [x, y, z], texture: state.texture },
