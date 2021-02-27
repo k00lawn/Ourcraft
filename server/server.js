@@ -25,6 +25,7 @@ wsServer.on("request", (request) => {
       const gameId = guid();
       games[gameId] = {
         id: gameId,
+        host: clientId,
         clients: [],
       };
 
