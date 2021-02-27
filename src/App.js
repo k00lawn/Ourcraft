@@ -10,6 +10,9 @@ import { Crosshair } from "./components/Crosshair";
 import { w3cwebsocket } from "websocket";
 
 const client = new w3cwebsocket("ws://127.0.0.7:9090");
+const getLocalStorage = (key) => JSON.parse(window.localStorage.getItem(key));
+const setLocalStorage = (key, value) =>
+  window.localStorage.setItem(key, JSON.stringify(value));
 
 function App() {
   const [{ x, y }] = useState({
@@ -83,12 +86,13 @@ function App() {
   // };
 
   // Call this function when block is placed
-  const onBlockPlaced = (cubePos, cubeType) => {
+  const onBlockPlaced = (key, cubePos, cubeType) => {
     const payLoad = {
       method: "play",
       clientId: clientId,
       gameId: gameId,
       cube: {
+        key: key,
         cubePos: cubePos,
         cubeType: cubeType,
       },

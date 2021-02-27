@@ -20,7 +20,7 @@ const Cube = ({
   const color = texture === "glass" ? "skyblue" : "white";
 
   useEffect(() => {
-    onBlockPlaced(position, texture);
+    onBlockPlaced(id, position, texture);
   }, []);
 
   return (

@@ -65,15 +65,16 @@ wsServer.on("request", (request) => {
     if (result.method === "play") {
       const gameId = result.gameId;
 
-      //   if (!gameId) return;
+      // if (!gameId) return;
       let cubePos = result.cube.cubePos;
       let cubeType = result.cube.cubeType;
+      let key = result.cube.key;
       let state = games[gameId].state;
       if (!state)
         state = {
           cubes: [],
         };
-      state.cubes.push({ pos: cubePos, texture: cubeType });
+      state.cubes.push({ key: key, pos: cubePos, texture: cubeType });
       games[gameId].state = state;
       console.log(state.cubes);
     }
