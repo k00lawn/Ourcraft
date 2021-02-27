@@ -2,6 +2,7 @@
 let clientId = null;
 let gameId = null;
 let playerColor = null;
+let host = null;
 
 let ws = new WebSocket("ws://localhost:9090")
 const btnCreate = document.getElementById("btnCreate");
@@ -77,7 +78,8 @@ ws.onmessage = message => {
 
     //create
     if (response.method === "create"){
-        gameId = response.game.id;
+        gameId = response.game.id;        
+        host = true;
         console.log("game successfully created with id " + response.game.id)  
     }
 
