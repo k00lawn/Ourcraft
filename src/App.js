@@ -40,9 +40,10 @@ function App() {
         if (!response.game.state) return;
 
         const cubes = response.game.state.cubes;
+        // console.log(cubes);
+        // cubes.map((cube) => setCubesState(cubes);
+        setCubesState((cubesState = cubes));
         console.log(cubes);
-        setCubesState(cubes);
-        cubesState.map((cubes) => console.log(cubes));
         console.log(cubesState);
       }
 
@@ -138,7 +139,7 @@ function App() {
           <Physics gravity={[0, -30, 0]}>
             <Ground position={[0, 0.5, 0]} />
             <Player position={[0, 3, 10]} />
-            <Cubes onBlockPlaced={onBlockPlaced} />
+            <Cubes onBlockPlaced={onBlockPlaced} cubesState={cubesState} />
           </Physics>
         </Canvas>
       </>

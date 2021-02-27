@@ -4,7 +4,7 @@ import { useInterval } from "../hooks/useInterval";
 
 import Cube from "./Cube";
 
-export default function Cubes({ onBlockPlaced }) {
+export default function Cubes({ onBlockPlaced, cubesState }) {
   const [cubes, addCube, removeCube, saveWorld] = useStore((state) => [
     state.cubes,
     state.addCube,
@@ -20,8 +20,20 @@ export default function Cubes({ onBlockPlaced }) {
     10000
   );
 
+  // return cubesState.map((cube, index) => {
+  //   return (
+  //     <Cube
+  //       key={index}
+  //       id={cube.key}
+  //       texture={cube.texture}
+  //       position={cube.pos}
+  //       addCube={addCube}
+  //       removeCube={removeCube}
+  //       onBlockPlaced={onBlockPlaced}
+  //     />
+  //   );
+  // });
   return cubes.map((cube, index) => {
-    // onBlockPlaced(cube.pos, cube.texture);
     return (
       <Cube
         key={cube.key}
