@@ -37,63 +37,75 @@ const Cube = ({
         e.stopPropagation();
         const clickedFace = Math.floor(e.faceIndex / 2);
         const { x, y, z } = ref.current.position;
-        console.log("activetex : ", activeTexture);
+        // console.log("activetex : ", activeTexture);
         if (clickedFace === 0) {
           // e.altKey ? removeCube(x, y, z) : addCube(x + 1, y, z);
-          if (e.altKey) removeCube(x, y, z);
-          else {
+          if (e.altKey) {
+            onBlockPlaced("remove", [x, y, z], texture, id);
+            removeCube(x, y, z);
+          } else {
             const xx = x + 1;
-            onBlockPlaced(id, [xx, y, z], texture);
+            onBlockPlaced("add", [xx, y, z], texture);
             addCube(xx, y, z);
           }
           return;
         }
         if (clickedFace === 1) {
           // e.altKey ? removeCube(x, y, z) : addCube(x - 1, y, z);
-          if (e.altKey) removeCube(x, y, z);
-          else {
+          if (e.altKey) {
+            onBlockPlaced("remove", [x, y, z], texture, id);
+            removeCube(x, y, z);
+          } else {
             const xx = x - 1;
-            onBlockPlaced(id, [xx, y, z], texture);
+            onBlockPlaced("add", [xx, y, z], texture);
             addCube(xx, y, z);
           }
           return;
         }
         if (clickedFace === 2) {
           // e.altKey ? removeCube(x, y, z) : addCube(x, y + 1, z);
-          if (e.altKey) removeCube(x, y, z);
-          else {
+          if (e.altKey) {
+            onBlockPlaced("remove", [x, y, z], texture, id);
+            removeCube(x, y, z);
+          } else {
             const yy = y + 1;
-            onBlockPlaced(id, [x, yy, z], texture);
+            onBlockPlaced("add", [x, yy, z], texture);
             addCube(x, yy, z);
           }
           return;
         }
         if (clickedFace === 3) {
           // e.altKey ? removeCube(x, y, z) : addCube(x, y - 1, z);
-          if (e.altKey) removeCube(x, y, z);
-          else {
+          if (e.altKey) {
+            onBlockPlaced("remove", [x, y, z], texture, id);
+            removeCube(x, y, z);
+          } else {
             const yy = y - 1;
-            onBlockPlaced(id, [x, yy, z], texture);
+            onBlockPlaced("add", [x, yy, z], texture);
             addCube(x, yy, z);
           }
           return;
         }
         if (clickedFace === 4) {
           // e.altKey ? removeCube(x, y, z) : addCube(x, y, z + 1);
-          if (e.altKey) removeCube(x, y, z);
-          else {
+          if (e.altKey) {
+            onBlockPlaced("remove", [x, y, z], texture, id);
+            removeCube(x, y, z);
+          } else {
             const zz = z + 1;
-            onBlockPlaced(id, [x, y, zz], texture);
+            onBlockPlaced("add", [x, y, zz], texture);
             addCube(x, y, zz);
           }
           return;
         }
         if (clickedFace === 5) {
           // e.altKey ? removeCube(x, y, z) : addCube(x, y, z - 1);
-          if (e.altKey) removeCube(x, y, z);
-          else {
+          if (e.altKey) {
+            onBlockPlaced("remove", [x, y, z], texture, id);
+            removeCube(x, y, z);
+          } else {
             const zz = z - 1;
-            onBlockPlaced(id, [x, y, zz], texture);
+            onBlockPlaced("add", [x, y, zz], texture);
             addCube(x, y, zz);
           }
           return;

@@ -12,13 +12,13 @@ export default function Cubes({ onBlockPlaced, cubesState }) {
     state.saveWorld,
   ]);
 
-  useInterval(
-    () => {
-      saveWorld(cubes);
-    },
-    // every 10 seconds
-    10000
-  );
+  // useInterval(
+  //   () => {
+  //     saveWorld(cubes);
+  //   },
+  //   // every 10 seconds
+  //   10000
+  // );
 
   return cubesState.map((cube, index) => {
     return (

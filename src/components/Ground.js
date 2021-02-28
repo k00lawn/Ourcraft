@@ -3,7 +3,7 @@ import { usePlane } from "use-cannon";
 import { TextureLoader, RepeatWrapping } from "three";
 import grass from "../images/grass.jpg";
 import { useStore } from "../hooks/useStore";
-import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 
 export const Ground = ({ position, onBlockPlaced }) => {
   const [ref] = usePlane(() => ({
@@ -28,7 +28,7 @@ export const Ground = ({ position, onBlockPlaced }) => {
         const [x, y, z] = Object.values(e.point).map((coord) =>
           Math.ceil(coord)
         );
-        onBlockPlaced(nanoid(), [x, y, z], activeTexture);
+        onBlockPlaced("add", [x, y, z], activeTexture);
         addCube(x, y, z, activeTexture);
       }}
     >

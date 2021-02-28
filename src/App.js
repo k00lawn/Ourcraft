@@ -46,8 +46,8 @@ function App() {
         // console.log(cubes);
         // cubes.map((cube) => setCubesState(cubes);
         setCubesState((cubesState = cubes));
-        console.log(cubes);
-        console.log(cubesState);
+        // console.log(cubes);
+        // console.log(cubesState);
       }
 
       //join
@@ -86,13 +86,14 @@ function App() {
   // };
 
   // Call this function when block is placed
-  const onBlockPlaced = (key, cubePos, cubeType) => {
+  const onBlockPlaced = (mode, cubePos, cubeType, id) => {
     const payLoad = {
       method: "play",
       clientId: clientId,
       gameId: gameId,
+      mode: mode,
+      id: id,
       cube: {
-        key: key,
         cubePos: cubePos,
         cubeType: cubeType,
       },
