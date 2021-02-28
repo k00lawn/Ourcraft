@@ -1,5 +1,5 @@
 const http = require("http");
-const nanoid = require("nanoid");
+const { nanoid } = require("nanoid");
 
 const websocketServer = require("websocket").server;
 const httpServer = http.createServer();
@@ -66,19 +66,25 @@ wsServer.on("request", (request) => {
     //a user plays
     if (result.method === "play") {
       const gameId = result.gameId;
-      if (gameId) {
-        let cubePos = result.cube.cubePos;
-        let cubeType = result.cube.cubeType;
-        let key = result.cube.key;
-        let state = games[gameId].state;
-        if (!state)
-          state = {
-            cubes: [],
-          };
-        state.cubes.push({ key: key, pos: cubePos, texture: cubeType });
-        games[gameId].state = state;
-        // console.log(state.cubes);
-      }
+      const mode = result.mode;
+
+      // if (!gameId) return;
+      let cubePos = result.cube.cubePos;
+      let cubeType = result.cube.cubeType;
+      let key = result.cube.key;
+      let state = games[gameId].state;
+      if (!state)
+        state = {
+          cubes: [],
+        };
+      if(mode === "remove") {
+        state.cubes.filter(cubes => cube.pos !== cubePos)
+      } else {
+        state.cubes.push({ key: nanoid(), pos: cubePos, texture: cubeType });
+      }  
+      games[gameId].state = state;
+      updateGameState()
+      console.log(state.cubes);
     }
   });
 
@@ -110,7 +116,7 @@ function updateGameState() {
     });
   }
 
-  setTimeout(updateGameState, 5000);
+  //setTimeout(updateGameState, 5000);
 }
 
 function S4() {
