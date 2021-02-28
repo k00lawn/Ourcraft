@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 export const Crosshair = (props) => {
   const xC = `${props.x}px`;

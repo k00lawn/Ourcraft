@@ -20,20 +20,7 @@ export default function Cubes({ onBlockPlaced, cubesState }) {
     10000
   );
 
-  // return cubesState.map((cube, index) => {
-  //   return (
-  //     <Cube
-  //       key={index}
-  //       id={cube.key}
-  //       texture={cube.texture}
-  //       position={cube.pos}
-  //       addCube={addCube}
-  //       removeCube={removeCube}
-  //       onBlockPlaced={onBlockPlaced}
-  //     />
-  //   );
-  // });
-  return cubes.map((cube, index) => {
+  return cubesState.map((cube, index) => {
     return (
       <Cube
         key={cube.key}
@@ -46,4 +33,18 @@ export default function Cubes({ onBlockPlaced, cubesState }) {
       />
     );
   });
+  // return cubes.map((cube, index) => {
+  //   return (
+  //     <Cube
+  //       key={cube.key}
+  //       id={cube.key}
+  //       texture={cube.texture}
+  //       activeTexture={activeTexture}
+  //       position={cube.pos}
+  //       addCube={addCube}
+  //       removeCube={removeCube}
+  //       onBlockPlaced={onBlockPlaced}
+  //     />
+  //   );
+  // });
 }
