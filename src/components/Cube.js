@@ -1,27 +1,21 @@
-import React, { memo } from "react";
-import { useBox } from "use-cannon";
-import { useState } from "react";
-import * as textures from "../textures";
+import React, { memo } from 'react';
+import { useBox } from 'use-cannon';
+import { useState } from 'react';
+import * as textures from '../textures';
 
-const Cube = ({
-  position,
-  texture,
-  addCube,
-  removeCube,
-  id,
-  onBlockPlaced,
-}) => {
+const Cube = ({ 
+  position, 
+  texture, 
+  addCube, 
+  removeCube
+ }) => {
   const [hover, setHover] = useState(null);
   const [ref] = useBox(() => ({
-    type: "Static",
+    type: 'Static',
     position,
   }));
 
-  const color = texture === "glass" ? "skyblue" : "white";
-  // useEffect(() => {
-  //   onBlockPlaced(id, position, texture);
-  // }, []);
-
+  const color = texture === 'glass' ? 'skyblue' : 'white';
   return (
     <mesh
       castShadow
@@ -37,77 +31,54 @@ const Cube = ({
         e.stopPropagation();
         const clickedFace = Math.floor(e.faceIndex / 2);
         const { x, y, z } = ref.current.position;
-        // console.log("activetex : ", activeTexture);
         if (clickedFace === 0) {
-          // e.altKey ? removeCube(x, y, z) : addCube(x + 1, y, z);
-          if (e.altKey) {
-            onBlockPlaced("remove", [x, y, z], texture, id);
-            removeCube(x, y, z);
-          } else {
-            const xx = x + 1;
-            onBlockPlaced("add", [xx, y, z], texture);
-            addCube(xx, y, z);
+          if(e.altKey ){
+            removeCube(x, y, z) 
           }
+           else{
+            const xx = x + 1;
+            addCube(xx, y, z);
+           }
           return;
         }
         if (clickedFace === 1) {
-          // e.altKey ? removeCube(x, y, z) : addCube(x - 1, y, z);
           if (e.altKey) {
-            onBlockPlaced("remove", [x, y, z], texture, id);
             removeCube(x, y, z);
           } else {
             const xx = x - 1;
-            onBlockPlaced("add", [xx, y, z], texture);
             addCube(xx, y, z);
           }
           return;
         }
         if (clickedFace === 2) {
-          // e.altKey ? removeCube(x, y, z) : addCube(x, y + 1, z);
           if (e.altKey) {
-            onBlockPlaced("remove", [x, y, z], texture, id);
             removeCube(x, y, z);
           } else {
             const yy = y + 1;
-            onBlockPlaced("add", [x, yy, z], texture);
             addCube(x, yy, z);
           }
           return;
         }
         if (clickedFace === 3) {
-          // e.altKey ? removeCube(x, y, z) : addCube(x, y - 1, z);
-          if (e.altKey) {
-            onBlockPlaced("remove", [x, y, z], texture, id);
-            removeCube(x, y, z);
-          } else {
-            const yy = y - 1;
-            onBlockPlaced("add", [x, yy, z], texture);
-            addCube(x, yy, z);
-          }
+          e.altKey ? removeCube(x, y, z) : addCube(x, y - 1, z);
           return;
         }
         if (clickedFace === 4) {
-          // e.altKey ? removeCube(x, y, z) : addCube(x, y, z + 1);
           if (e.altKey) {
-            onBlockPlaced("remove", [x, y, z], texture, id);
             removeCube(x, y, z);
           } else {
             const zz = z + 1;
-            onBlockPlaced("add", [x, y, zz], texture);
             addCube(x, y, zz);
           }
           return;
         }
         if (clickedFace === 5) {
-          // e.altKey ? removeCube(x, y, z) : addCube(x, y, z - 1);
           if (e.altKey) {
-            onBlockPlaced("remove", [x, y, z], texture, id);
             removeCube(x, y, z);
           } else {
             const zz = z - 1;
-            onBlockPlaced("add", [x, y, zz], texture);
             addCube(x, y, zz);
-          }
+          }          
           return;
         }
       }}
@@ -117,8 +88,8 @@ const Cube = ({
           attachArray="material"
           map={textures[texture]}
           key={index}
-          color={hover === index ? "gray" : color}
-          opacity={texture === "glass" ? 0.7 : 1}
+          color={hover === index ? 'gray' : color}
+          opacity={texture === 'glass' ? 0.7 : 1}
           transparent={true}
         />
       ))}

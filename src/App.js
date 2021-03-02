@@ -9,7 +9,7 @@ import { Hud } from "./components/Hud";
 import { Crosshair } from "./components/Crosshair";
 import { w3cwebsocket } from "websocket";
 
-const client = new w3cwebsocket("ws://127.0.0.7:9090");
+const client = new w3cwebsocket("ws://localhost:9090");
 // const getLocalStorage = (key) => JSON.parse(window.localStorage.getItem(key));
 // const setLocalStorage = (key, value) =>
 //   window.localStorage.setItem(key, JSON.stringify(value));
@@ -142,9 +142,9 @@ function App() {
           <pointLight castShadow intensity={0.7} position={[100, 100, 100]} />
           <Hud position={[0, 1.1, -2]} />
           <Physics gravity={[0, -30, 0]}>
-            <Ground position={[0, 0.5, 0]} onBlockPlaced={onBlockPlaced} />
+            <Ground position={[0, 0.5, 0]}  />
             <Player position={[0, 3, 10]} />
-            <Cubes onBlockPlaced={onBlockPlaced} cubesState={cubesState} />
+            <Cubes cubesState={cubesState} />
           </Physics>
         </Canvas>
       </>
