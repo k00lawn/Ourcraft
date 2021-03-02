@@ -18,7 +18,7 @@ wsServer.on("request", (request) => {
   connection.on("close", () => console.log("closed!"));
   connection.on("message", (message) => {
     const result = JSON.parse(message.utf8Data);
-    console.log(result);
+    // console.log(result);
     //I have received a message from the client
     //a user want to create a new game
     if (result.method === "create") {
@@ -76,13 +76,7 @@ wsServer.on("request", (request) => {
         state = {
           cubes: [],
         };
-      if (mode === "remove") {
-        // state.cubes = state.cubes.filter(
-        //   (cube) =>
-        //     cube.pos[0] !== cubePos[0] &&
-        //     cube.pos[1] !== cubePos[1] &&
-        //     cube.pos[2] !== cubePos[2]
-        // );
+      if (mode === "remove") {        
         let id = result.id;
         state.cubes = state.cubes.filter((cube) => cube.key !== id);
       } else {
@@ -90,7 +84,7 @@ wsServer.on("request", (request) => {
       }
       games[gameId].state = state;
       updateGameState();
-      console.log(state.cubes);
+      // console.log(state.cubes);
     }
   });
 

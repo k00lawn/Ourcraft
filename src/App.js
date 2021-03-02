@@ -10,9 +10,6 @@ import { Crosshair } from "./components/Crosshair";
 import { w3cwebsocket } from "websocket";
 
 const client = new w3cwebsocket("ws://127.0.0.7:9090");
-// const getLocalStorage = (key) => JSON.parse(window.localStorage.getItem(key));
-// const setLocalStorage = (key, value) =>
-//   window.localStorage.setItem(key, JSON.stringify(value));
 
 function App() {
   const [{ x, y }] = useState({
@@ -42,12 +39,8 @@ function App() {
       if (response.method === "update") {
         if (!response.game.state) return;
 
-        const cubes = response.game.state.cubes;
-        // console.log(cubes);
-        // cubes.map((cube) => setCubesState(cubes);
+        const cubes = response.game.state.cubes;        
         setCubesState((cubesState = cubes));
-        // console.log(cubes);
-        // console.log(cubesState);
       }
 
       //join
@@ -78,12 +71,7 @@ function App() {
     };
 
     client.send(JSON.stringify(payLoad));
-  };
-
-  // const changeHandler = (e) => {
-  //   setTxtgameid(e.target.value);
-  //   console.log(txtGameId);
-  // };
+  };  
 
   // Call this function when block is placed
   const onBlockPlaced = (mode, cubePos, cubeType, id) => {
@@ -99,12 +87,7 @@ function App() {
       },
     };
     client.send(JSON.stringify(payLoad));
-  };
-
-  // const changeHandler = (e) => {
-  //   console.log("txt : ", txtGameId);
-  //   setTxtgameid(e.target.value);
-  // };
+  };  
 
   return (
     <>
@@ -130,7 +113,7 @@ function App() {
             </div>
             <div id="divBoard"></div>
           </div>
-          <script src="../server/index.js"></script>
+          {/* <script src="../server/index.js"></script> */}
         </div>
       </>
       <>
