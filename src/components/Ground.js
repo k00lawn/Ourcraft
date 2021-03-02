@@ -1,15 +1,13 @@
-import React from "react";
-import { usePlane } from "use-cannon";
-import { TextureLoader, RepeatWrapping } from "three";
-import grass from "../images/grass.jpg";
-import { useStore } from "../hooks/useStore";
-// import { nanoid } from "nanoid";
+import React from 'react';
+import { usePlane } from 'use-cannon';
+import { TextureLoader, RepeatWrapping } from 'three';
+import grass from '../images/grass.jpg';
+import { useStore } from '../hooks/useStore';
 
-export const Ground = ({ position, onBlockPlaced }) => {
+export const Ground = ({ position}) => {
   const [ref] = usePlane(() => ({
-    rotation: [-Math.PI / 2, 0, 0],
-    position,
-  }));
+     rotation: [-Math.PI / 2, 0, 0],
+    ...position }));
   const texture = new TextureLoader().load(grass);
   const [addCube, activeTexture] = useStore((state) => [
     state.addCube,
@@ -24,11 +22,9 @@ export const Ground = ({ position, onBlockPlaced }) => {
       receiveShadow
       onClick={(e) => {
         e.stopPropagation();
-        // console.log("texture : ", activeTexture);
         const [x, y, z] = Object.values(e.point).map((coord) =>
-          Math.ceil(coord)
+          Math.ceil(coord),
         );
-        onBlockPlaced("add", [x, y, z], activeTexture);
         addCube(x, y, z, activeTexture);
       }}
     >

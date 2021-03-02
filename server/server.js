@@ -71,11 +71,13 @@ wsServer.on("request", (request) => {
       // if (!gameId) return;
       let cubePos = result.cube.cubePos;
       let cubeType = result.cube.cubeType;
-      let state = games[gameId].state;
-      if (!state)
-        state = {
-          cubes: [],
-        };
+    
+       if (games[gameId]){
+        let state = games[gameId].state;
+        if (!state)
+          state = {
+            cubes: [],
+          };  
       if (mode === "remove") {
         // state.cubes = state.cubes.filter(
         //   (cube) =>
@@ -91,6 +93,7 @@ wsServer.on("request", (request) => {
       games[gameId].state = state;
       updateGameState();
       console.log(state.cubes);
+    }
     }
   });
 

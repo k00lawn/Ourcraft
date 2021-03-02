@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from "react";
-import { useSphere } from "use-cannon";
-import { useThree, useFrame } from "react-three-fiber";
-import { FPVControls } from "./FPVControls";
-import { useKeyboardControls } from "../hooks/useKeyboardControls";
-import { Vector3 } from "three";
+import React, { useEffect, useRef } from 'react';
+import { useSphere } from 'use-cannon';
+import { useThree, useFrame } from 'react-three-fiber';
+import { FPVControls } from './FPVControls';
+import { useKeyboardControls } from '../hooks/useKeyboardControls';
+import { Vector3 } from 'three';
 
 const SPEED = 6;
 
@@ -18,7 +18,7 @@ export const Player = (props) => {
   } = useKeyboardControls();
   const [ref, api] = useSphere(() => ({
     mass: 1,
-    type: "Dynamic",
+    type: 'Dynamic',
     ...props,
   }));
 
@@ -34,12 +34,12 @@ export const Player = (props) => {
     const frontVector = new Vector3(
       0,
       0,
-      (moveBackward ? 1 : 0) - (moveForward ? 1 : 0)
+      (moveBackward ? 1 : 0) - (moveForward ? 1 : 0),
     );
     const sideVector = new Vector3(
       (moveLeft ? 1 : 0) - (moveRight ? 1 : 0),
       0,
-      0
+      0,
     );
 
     direction
