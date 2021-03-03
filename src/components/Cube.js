@@ -1,34 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-import { BoxBufferGeometry } from 'three'
-import { useBox }  from 'use-cannon'
-import * as textures from '../textures'
-
-export const Cube =({ position, type,...props}) =>{
-const [ref] = useBox(() =>({
-    type: 'Static',
-    position,
-    ...props
-
-}))
-
-return(
-    <mesh castShadow ref={ref}>
-        {[ ...Array(6)].map((_, index) => (
-            <meshStandardMaterial
-                attachArray="material"
-                map={textures[type]}
-                key={index}
-            />
-        ))}
-        <boxBufferGeometry attach="geometry"/>
-
-    </mesh>
-)
-}
-
-export default  Cube
-=======
 import React, { memo } from "react";
 import { useBox } from "use-cannon";
 import { useState } from "react";
@@ -168,4 +137,3 @@ function equalProps(prevProps, nextProps) {
 }
 
 export default memo(Cube, equalProps);
->>>>>>> 79926486ca60601ea9f4799c46ad46ce63242765

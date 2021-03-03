@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-import React from 'react';
-import { usePlane } from 'use-cannon';
-import { TextureLoader, RepeatWrapping } from 'three';
-import grass from '../images/grass.jpg';
-import { useStore } from '../hooks/useStore';
-=======
 import React from "react";
 import { usePlane } from "use-cannon";
 import { TextureLoader, RepeatWrapping } from "three";
 import grass from "../images/grass.jpg";
 import { useStore } from "../hooks/useStore";
 // import { nanoid } from "nanoid";
->>>>>>> 79926486ca60601ea9f4799c46ad46ce63242765
 
 export const Ground = ({ position, onBlockPlaced }) => {
   const [ref] = usePlane(() => ({

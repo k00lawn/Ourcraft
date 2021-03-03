@@ -16,14 +16,9 @@
     "react-three-fiber": "^4.2.21",
     "three": "^0.120.1",
     "use-cannon": "^0.5.0",
-<<<<<<< HEAD
-    "zustand": "^3.0.3",
-    "web-vitals": "^1.1.0"
-=======
     "web-vitals": "^1.1.0",
     "websocket": "^1.0.33",
     "zustand": "^3.0.3"
->>>>>>> 79926486ca60601ea9f4799c46ad46ce63242765
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import { Canvas } from 'react-three-fiber';
-import { Sky } from 'drei';
-import { Physics } from 'use-cannon';
-import { Ground } from './components/Ground';
-import { Player } from './components/Player';
-import Cube from './components/Cube';
-=======
 import React, { useEffect, useState } from "react";
 import { Canvas } from "react-three-fiber";
 import { Sky, Stars } from "drei";
@@ -18,8 +9,7 @@ import { Hud } from "./components/Hud";
 import { Crosshair } from "./components/Crosshair";
 import { w3cwebsocket } from "websocket";
 
-const client = new w3cwebsocket("ws://127.0.0.7:9090");
->>>>>>> 79926486ca60601ea9f4799c46ad46ce63242765
+const client = new w3cwebsocket("ws://localhost:9090");
 
 function App() {
   const [{ x, y }] = useState({
@@ -100,18 +90,6 @@ function App() {
   };  
 
   return (
-<<<<<<< HEAD
-    <Canvas shadowMap sRGB>
-      <Sky sunPosition={[100, 20, 100]} />
-      <ambientLight intensity={0.25} />
-      <pointLight castShadow intensity={0.7} position={[100, 100, 100]} />
-      <Physics gravity={[0, -30, 0]}>
-        <Ground position={[0, 0.5, 0]} />
-        <Player position={[0, 3, 10]} />
-        <Cube position={[0, 1, 0]} type="wood" />
-      </Physics>
-    </Canvas>
-=======
     <>
       <>
         <div>
@@ -154,7 +132,6 @@ function App() {
         </Canvas>
       </>
     </>
->>>>>>> 79926486ca60601ea9f4799c46ad46ce63242765
   );
 }
 
