@@ -93,7 +93,7 @@ function App() {
     <>
       <>
         <div>
-          <h1>Ball Game</h1>
+          <h1>Ourcraft</h1>
 
           <div style={{ display: "flex" }}>
             <button id="btnCreate" onClick={createNewGame}>
