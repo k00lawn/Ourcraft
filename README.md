@@ -31,7 +31,7 @@ open ```localhost:3000``` in your browser
 
 ```Left Mouse Button``` to place blocks
 
-```Alt + Left``` Mouse button to destroy blocks
+```Alt + Left Mouse button``` to destroy blocks
 
 ```Spacebar``` to jump
 
