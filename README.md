@@ -19,9 +19,13 @@ install dependencies,
 
 ```npm install```
 
-start the app
+start the client server,
 
 ```npm start```
+
+start the backend server,
+
+```nodemon server/server.js```
 
 open ```localhost:3000``` in your browser
 
