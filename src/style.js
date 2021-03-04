@@ -8,7 +8,6 @@ export default {
          width: 100%;
         background-color: white;
         padding: 20px;
-        margin-bottom: 40px;
         border: 2px solid black;
         display: flex;
         justify-content: center;

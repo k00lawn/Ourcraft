@@ -29,6 +29,7 @@ function App() {
   let [txtGameId, setTxtgameid] = useState('');
   const [showModal, setShowModal] = useState(true)
   const [hidePlayBtn, setHidePlayBtn] = useState(false)
+  const [copiedId, setcopiedId] = useState('')
   const { menu, hideBtn } = style
   const menuItems = [
     'Resume', 'Invite Players', 'help', 'quit'
@@ -119,7 +120,12 @@ function App() {
   }
 
   const onClickJoinWorld = () => {
+    joinGame() 
+  }
 
+  const handleValueChange=(e) =>{
+    setTxtgameid(e.target.value);
+    setcopiedId(e.target.value)
   }
 
   const getMenuContent = () => {
@@ -131,9 +137,12 @@ function App() {
           )
         })} */}
         <button css={hidePlayBtn ? hideBtn : menu} onClick={onPlay}>Play</button>
-        {hidePlayBtn ? (<div style={{ display: 'flex' }}>
-          <button css={menu} style={{marginRight: '10px'}} onClick={() => onClickCreateWorld()}>Create World</button>
-          <button css={menu} onClick={onClickJoinWorld}>Join World</button>
+        {hidePlayBtn ? (<div>
+            <button css={menu} style={{marginRight: '10px'}} onClick={() => onClickCreateWorld()}>Create World</button>
+            <div style={{ display:'flex'}}>
+              <input onChange={handleValueChange} value={copiedId}/>
+              <button css={menu} onClick={onClickJoinWorld}>Join World</button>
+            </div>
         </div>) : null}
       </div>
     )
@@ -142,26 +151,10 @@ function App() {
     <>
       <>
         <div>
-          <h1>Ball Game</h1>
-
-          <div style={{ display: "flex" }}>
-            <button id="btnCreate" onClick={createNewGame}>
-              New Game
-            </button>
-            <button id="btnJoin" onClick={joinGame}>
-              Join Game
-            </button>
-            <input
-              type="text"
-              id="txtGameId"
-              onChange={(e) => setTxtgameid(e.target.value)}
-            // value={gameId.length ? gameId : txtGameId}
-            />
-            <div id="divPlayers" style={{ border: "2px solid red" }}>
-              {gameId}
-            </div>
-            <div id="divBoard"></div>
-          </div>
+          <h1>Our Craft</h1>
+          <div>World Id: {txtGameId}</div>
+          <button onClick={() => navigator.clipboard.writeText(txtGameId)}>Copy</button>
+         
           {/* <script src="../server/index.js"></script> */}
         </div>
       </>
