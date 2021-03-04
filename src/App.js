@@ -1,4 +1,6 @@
+/** @jsx jsx */
 import React, { useEffect, useState } from "react";
+import { css, jsx } from '@emotion/core';
 import { Canvas } from "react-three-fiber";
 import { Sky, Stars } from "drei";
 import { Physics } from "use-cannon";
@@ -8,8 +10,11 @@ import { Player } from "./components/Player";
 import { Hud } from "./components/Hud";
 import { Crosshair } from "./components/Crosshair";
 import { w3cwebsocket } from "websocket";
+import ModalComponent from './components/Modal'
+import style from './style'
 
-const client = new w3cwebsocket("ws://127.0.0.7:9090");
+
+const client = new w3cwebsocket("ws://localhost:9090");
 
 function App() {
   const [{ x, y }] = useState({
@@ -17,29 +22,36 @@ function App() {
     y: window.innerHeight / 2 - 100,
   });
 
-  let [clientId, setClientId] = useState("");
+
+  let [clientId, setClientId] = useState('');
   let [cubesState, setCubesState] = useState([]);
-  let [gameId, setGameId] = useState("");
-  let [txtGameId, setTxtgameid] = useState("");
+  let [gameId, setGameId] = useState('');
+  let [txtGameId, setTxtgameid] = useState('');
+  const [showModal, setShowModal] = useState(true)
+  const [hidePlayBtn, setHidePlayBtn] = useState(false)
+  const { menu, hideBtn } = style
+  const menuItems = [
+    'Resume', 'Invite Players', 'help', 'quit'
+  ]
 
   useEffect(() => {
     client.onmessage = (message) => {
       const response = JSON.parse(message.data);
       if (response.method === "connect") {
         setClientId(response.clientId);
-        console.log("Client id Set successfully " + clientId);
+        console.log("Client id Set successfully " + response.clientId);
       }
 
       //create
-      if (response.method === "create") {
-        setGameId(response.game.id);
+      if (response.method === "create") {   
         console.log("game successfully created with id " + response.game.id);
+        setTxtgameid(response.game.id)
       }
 
       if (response.method === "update") {
         if (!response.game.state) return;
 
-        const cubes = response.game.state.cubes;        
+        const cubes = response.game.state.cubes;
         setCubesState((cubesState = cubes));
       }
 
@@ -52,17 +64,18 @@ function App() {
   }, []);
 
   const createNewGame = () => {
-    console.log("neww game btn is clicked");
+    console.log(" create new game btn is clicked");
     const payLoad = {
       method: "create",
       clientId: clientId,
     };
-
-    client.send(JSON.stringify(payLoad));
+   
+    client.send(JSON.stringify(payLoad)); 
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const joinGame = () => {
-    console.log(`this is the xtgameid : ${txtGameId}`);
+    console.log(` joined game btn is clicke: ${txtGameId}`);
     setGameId(txtGameId);
     const payLoad = {
       method: "join",
@@ -70,8 +83,17 @@ function App() {
       gameId: txtGameId,
     };
 
+    setShowModal(false)
     client.send(JSON.stringify(payLoad));
-  };  
+  };
+
+  useEffect(() => {
+    console.log("txt id is ett", txtGameId);
+    if (txtGameId){
+      joinGame() 
+    }  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [txtGameId])
 
   // Call this function when block is placed
   const onBlockPlaced = (mode, cubePos, cubeType, id) => {
@@ -87,8 +109,35 @@ function App() {
       },
     };
     client.send(JSON.stringify(payLoad));
-  };  
+  };
 
+  const onPlay = () => {
+    setHidePlayBtn(true)
+  }
+  const onClickCreateWorld = () => {
+    createNewGame()
+  }
+
+  const onClickJoinWorld = () => {
+
+  }
+
+  const getMenuContent = () => {
+    return (
+      <div >
+        {/* {menuItems.map((item) => {
+          return (
+            <div css={menu} onClick={closeModal}>{item}</div>
+          )
+        })} */}
+        <button css={hidePlayBtn ? hideBtn : menu} onClick={onPlay}>Play</button>
+        {hidePlayBtn ? (<div style={{ display: 'flex' }}>
+          <button css={menu} style={{marginRight: '10px'}} onClick={() => onClickCreateWorld()}>Create World</button>
+          <button css={menu} onClick={onClickJoinWorld}>Join World</button>
+        </div>) : null}
+      </div>
+    )
+  }
   return (
     <>
       <>
@@ -106,7 +155,7 @@ function App() {
               type="text"
               id="txtGameId"
               onChange={(e) => setTxtgameid(e.target.value)}
-              // value={gameId.length ? gameId : txtGameId}
+            // value={gameId.length ? gameId : txtGameId}
             />
             <div id="divPlayers" style={{ border: "2px solid red" }}>
               {gameId}
@@ -130,9 +179,19 @@ function App() {
             <Cubes onBlockPlaced={onBlockPlaced} cubesState={cubesState} />
           </Physics>
         </Canvas>
+
+        <ModalComponent
+          open={showModal}
+          onClose={showModal}
+          headerText="menu"
+          centerheader
+          closeButton
+          children={getMenuContent()}
+        />
       </>
     </>
   );
 }
 
 export default App;
+

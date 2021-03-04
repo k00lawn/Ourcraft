@@ -71,20 +71,29 @@ wsServer.on("request", (request) => {
       // if (!gameId) return;
       let cubePos = result.cube.cubePos;
       let cubeType = result.cube.cubeType;
-      let state = games[gameId].state;
-      if (!state)
-        state = {
-          cubes: [],
-        };
-      if (mode === "remove") {        
-        let id = result.id;
-        state.cubes = state.cubes.filter((cube) => cube.key !== id);
-      } else {
-        state.cubes.push({ key: nanoid(), pos: cubePos, texture: cubeType });
+
+      if (games[gameId]) {
+        let state = games[gameId].state;
+        if (!state)
+          state = {
+            cubes: [],
+          };
+        if (mode === "remove") {
+          // state.cubes = state.cubes.filter(
+          //   (cube) =>
+          //     cube.pos[0] !== cubePos[0] &&
+          //     cube.pos[1] !== cubePos[1] &&
+          //     cube.pos[2] !== cubePos[2]
+          // );
+          let id = result.id;
+          state.cubes = state.cubes.filter((cube) => cube.key !== id);
+        } else {
+          state.cubes.push({ key: nanoid(), pos: cubePos, texture: cubeType });
+        }
+        games[gameId].state = state;
+        updateGameState();
+        // console.log(state.cubes);
       }
-      games[gameId].state = state;
-      updateGameState();
-      // console.log(state.cubes);
     }
   });
 
@@ -139,3 +148,4 @@ const guid = () =>
     S4() +
     S4()
   ).toLowerCase();
+

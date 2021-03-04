@@ -63,3 +63,9 @@ body {
   bottom: 5px;
   z-index: 9;
 }
+
+
+@font-face {
+  font-family: 'arcadeClassic';
+  src: url(assets/ARCADECLASSIC.TTF);
+}
