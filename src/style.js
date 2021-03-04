@@ -22,6 +22,23 @@ export default {
 
      hideBtn: css`
         display: none;
+     `,
+     txtStyle: css`
+      font-family: arcadeClassic;
+       font-size: 2rem;
+       text-align: center;
+     `,
+     centerAlign: css`
+      display: flex ;
+      justify-content: center;
+     `,
+     inputBoxStyle: css`
+         width: 80%;
+         display: flex;
+         margin: auto;
+         padding: 20px;
+         background-color: white;
+         margin-bottom:10px;
      `
 
 

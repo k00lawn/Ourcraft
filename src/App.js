@@ -30,7 +30,7 @@ function App() {
   const [showModal, setShowModal] = useState(true)
   const [hidePlayBtn, setHidePlayBtn] = useState(false)
   const [copiedId, setcopiedId] = useState('')
-  const { menu, hideBtn } = style
+  const { menu, hideBtn, txtStyle, inputBoxStyle, centerAlign} = style
   const menuItems = [
     'Resume', 'Invite Players', 'help', 'quit'
   ]
@@ -124,8 +124,11 @@ function App() {
   }
 
   const handleValueChange=(e) =>{
-    setTxtgameid(e.target.value);
     setcopiedId(e.target.value)
+    if (e.target.value.length == 36){ //length of gameID
+      setTxtgameid(e.target.value);
+    }
+    
   }
 
   const getMenuContent = () => {
@@ -136,24 +139,26 @@ function App() {
             <div css={menu} onClick={closeModal}>{item}</div>
           )
         })} */}
-        <button css={hidePlayBtn ? hideBtn : menu} onClick={onPlay}>Play</button>
-        {hidePlayBtn ? (<div>
-            <button css={menu} style={{marginRight: '10px'}} onClick={() => onClickCreateWorld()}>Create World</button>
-            <div style={{ display:'flex'}}>
-              <input onChange={handleValueChange} value={copiedId}/>
+        <button css={hidePlayBtn ? hideBtn : menu}  onClick={onPlay}>Play</button>
+        {hidePlayBtn ? 
+        (<div>
+            <button css={menu} style={{ marginRight: '10px', marginBottom: '10px'}} onClick={() => onClickCreateWorld()}>Create World</button>
+            <input css={[inputBoxStyle, txtStyle]} onChange={handleValueChange} placeholder="Enter  world  id " value={copiedId}/>
               <button css={menu} onClick={onClickJoinWorld}>Join World</button>
-            </div>
         </div>) : null}
       </div>
     )
   }
+
   return (
     <>
       <>
         <div>
-          <h1>Our Craft</h1>
-          <div>World Id: {txtGameId}</div>
-          <button onClick={() => navigator.clipboard.writeText(txtGameId)}>Copy</button>
+          <h1 css={txtStyle} >Our Craft</h1>
+          { txtGameId?  <div css={centerAlign}>
+            <div css={txtStyle}>World Id: {txtGameId}</div>
+           <button css={txtStyle} onClick={() => navigator.clipboard.writeText(txtGameId)}>Copy</button>
+          </div>: null}
          
           {/* <script src="../server/index.js"></script> */}
         </div>
