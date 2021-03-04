@@ -43,11 +43,7 @@ function App() {
         if (!response.game.state) return;
 
         const cubes = response.game.state.cubes;
-        // console.log(cubes);
-        // cubes.map((cube) => setCubesState(cubes);
         setCubesState((cubesState = cubes));
-        // console.log(cubes);
-        // console.log(cubesState);
       }
 
       //join
@@ -79,11 +75,6 @@ function App() {
 
     client.send(JSON.stringify(payLoad));
   };
-
-  // const changeHandler = (e) => {
-  //   setTxtgameid(e.target.value);
-  //   console.log(txtGameId);
-  // };
 
   // Call this function when block is placed
   const onBlockPlaced = (mode, cubePos, cubeType, id) => {

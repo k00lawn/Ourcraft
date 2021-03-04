@@ -39,7 +39,6 @@ export default function Cubes({ onBlockPlaced, cubesState }) {
   //       key={cube.key}
   //       id={cube.key}
   //       texture={cube.texture}
-  //       activeTexture={activeTexture}
   //       position={cube.pos}
   //       addCube={addCube}
   //       removeCube={removeCube}
