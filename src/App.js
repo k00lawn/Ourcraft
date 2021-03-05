@@ -111,11 +111,11 @@ function App() {
     client.send(JSON.stringify(payLoad));
   };
 
-  const onPlay = () => {
+  const onPlay = (e) => {
     setHidePlayBtn(true)
   }
   const onClickCreateWorld = () => {
-    createNewGame()
+    createNewGame()   
   }
 
   const onClickJoinWorld = () => {
@@ -132,7 +132,7 @@ function App() {
 
   const getMenuContent = () => {
     return (
-      <div >
+      <div>
         {/* {menuItems.map((item) => {
           return (
             <div css={menu} onClick={closeModal}>{item}</div>
@@ -153,7 +153,7 @@ function App() {
     <>
       <>
         <div>
-          <h1 css={txtStyle} >Our Craft</h1>
+          <h1 css={txtStyle} style={{ fontSize: '3rem'}}>Our Craft</h1>
           { txtGameId?  <div css={centerAlign}>
             <div css={txtStyle}>World Id: {txtGameId}</div>
            <button css={txtStyle} onClick={() => navigator.clipboard.writeText(txtGameId)}>Copy</button>
@@ -163,6 +163,8 @@ function App() {
         </div>
       </>
       <>
+        {txtGameId ? 
+        (<>
         <Crosshair x={x} y={y} />
         <Canvas shadowMap sRGB>
           <Stars color="black" />
@@ -176,6 +178,7 @@ function App() {
             <Cubes onBlockPlaced={onBlockPlaced} cubesState={cubesState} />
           </Physics>
         </Canvas>
+        </>): null}
 
         <ModalComponent
           open={showModal}
