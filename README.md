@@ -24,7 +24,7 @@ start the client server,
 
 ```npm start```
 
-start the backend server,
+start the backend server in another terminal,
 
 ```nodemon server/server.js```
 
