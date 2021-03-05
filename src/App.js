@@ -153,7 +153,7 @@ function App() {
     <>
       <>
         <div>
-          <h1 css={txtStyle} style={{ fontSize: '3rem'}}>Our Craft</h1>
+          <h1 css={txtStyle} style={{ fontSize: '3rem', margin :0}}>Our Craft</h1>
           { txtGameId?  <div css={centerAlign}>
             <div css={txtStyle}>World Id: {txtGameId}</div>
            <button css={txtStyle} onClick={() => navigator.clipboard.writeText(txtGameId)}>Copy</button>
