@@ -64,10 +64,8 @@ body {
   z-index: 9;
 }
 
-body {
-  position: fixed;
-  overflow: hidden;
-  overscroll-behavior-y: none;
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
-  color: black;
+
+@font-face {
+  font-family: 'arcadeClassic';
+  src: url(assets/ARCADECLASSIC.TTF);
 }
