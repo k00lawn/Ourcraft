@@ -7,20 +7,22 @@ const setLocalStorage = (key, value) =>
 
 export const useStore = create((set) => ({
   texture: "dirt",
+  activeTexture: "dirt",
   // cubes: getLocalStorage("world") || [],
   cubes: [],
-  addCube: (x, y, z) =>
+  addCube: (x, y, z) => {
     set((state) => ({
-      block: (() =>
-        console
-          .log
-          // `cube pos : ${x}, ${y}, ${z}} | cube texture : ${state.texture}`
-          ())(),
+      texture: state.texture,
+      // block: (() =>
+      //   console.log(
+      //     `cube pos : ${x}, ${y}, ${z}} | cube texture : ${state.texture}`
+      //   ))(),
       cubes: [
         ...state.cubes,
         { key: nanoid(), pos: [x, y, z], texture: state.texture },
       ],
-    })),
+    }));
+  },
   removeCube: (x, y, z) => {
     set((state) => ({
       cubes: state.cubes.filter((cube) => {
