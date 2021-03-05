@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import { useBox } from "use-cannon";
 import { useState } from "react";
 import * as textures from "../textures";
+import { useStore } from "../hooks/useStore";
 
 const Cube = ({
   position,
@@ -22,6 +23,8 @@ const Cube = ({
   //   onBlockPlaced(id, position, texture);
   // }, []);
 
+  const [activeTexture] = useStore((state) => [state.texture]);
+
   return (
     <mesh
       castShadow
@@ -35,17 +38,17 @@ const Cube = ({
       }}
       onClick={(e) => {
         e.stopPropagation();
+        console.log(`active texture is : ${activeTexture}`);
         const clickedFace = Math.floor(e.faceIndex / 2);
         const { x, y, z } = ref.current.position;
-        // console.log("activetex : ", activeTexture);
         if (clickedFace === 0) {
           // e.altKey ? removeCube(x, y, z) : addCube(x + 1, y, z);
           if (e.altKey) {
-            onBlockPlaced("remove", [x, y, z], texture, id);
+            onBlockPlaced("remove", [x, y, z], activeTexture, id);
             removeCube(x, y, z);
           } else {
             const xx = x + 1;
-            onBlockPlaced("add", [xx, y, z], texture);
+            onBlockPlaced("add", [xx, y, z], activeTexture);
             addCube(xx, y, z);
           }
           return;
@@ -53,11 +56,11 @@ const Cube = ({
         if (clickedFace === 1) {
           // e.altKey ? removeCube(x, y, z) : addCube(x - 1, y, z);
           if (e.altKey) {
-            onBlockPlaced("remove", [x, y, z], texture, id);
+            onBlockPlaced("remove", [x, y, z], activeTexture, id);
             removeCube(x, y, z);
           } else {
             const xx = x - 1;
-            onBlockPlaced("add", [xx, y, z], texture);
+            onBlockPlaced("add", [xx, y, z], activeTexture);
             addCube(xx, y, z);
           }
           return;
@@ -65,11 +68,11 @@ const Cube = ({
         if (clickedFace === 2) {
           // e.altKey ? removeCube(x, y, z) : addCube(x, y + 1, z);
           if (e.altKey) {
-            onBlockPlaced("remove", [x, y, z], texture, id);
+            onBlockPlaced("remove", [x, y, z], activeTexture, id);
             removeCube(x, y, z);
           } else {
             const yy = y + 1;
-            onBlockPlaced("add", [x, yy, z], texture);
+            onBlockPlaced("add", [x, yy, z], activeTexture);
             addCube(x, yy, z);
           }
           return;
@@ -77,11 +80,11 @@ const Cube = ({
         if (clickedFace === 3) {
           // e.altKey ? removeCube(x, y, z) : addCube(x, y - 1, z);
           if (e.altKey) {
-            onBlockPlaced("remove", [x, y, z], texture, id);
+            onBlockPlaced("remove", [x, y, z], activeTexture, id);
             removeCube(x, y, z);
           } else {
             const yy = y - 1;
-            onBlockPlaced("add", [x, yy, z], texture);
+            onBlockPlaced("add", [x, yy, z], activeTexture);
             addCube(x, yy, z);
           }
           return;
@@ -89,11 +92,11 @@ const Cube = ({
         if (clickedFace === 4) {
           // e.altKey ? removeCube(x, y, z) : addCube(x, y, z + 1);
           if (e.altKey) {
-            onBlockPlaced("remove", [x, y, z], texture, id);
+            onBlockPlaced("remove", [x, y, z], activeTexture, id);
             removeCube(x, y, z);
           } else {
             const zz = z + 1;
-            onBlockPlaced("add", [x, y, zz], texture);
+            onBlockPlaced("add", [x, y, zz], activeTexture);
             addCube(x, y, zz);
           }
           return;
@@ -101,11 +104,11 @@ const Cube = ({
         if (clickedFace === 5) {
           // e.altKey ? removeCube(x, y, z) : addCube(x, y, z - 1);
           if (e.altKey) {
-            onBlockPlaced("remove", [x, y, z], texture, id);
+            onBlockPlaced("remove", [x, y, z], activeTexture, id);
             removeCube(x, y, z);
           } else {
             const zz = z - 1;
-            onBlockPlaced("add", [x, y, zz], texture);
+            onBlockPlaced("add", [x, y, zz], activeTexture);
             addCube(x, y, zz);
           }
           return;

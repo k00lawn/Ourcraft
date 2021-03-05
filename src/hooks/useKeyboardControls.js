@@ -20,6 +20,7 @@ function textureByKey(key) {
     Digit4: "log",
     Digit5: "diamond",
     Digit6: "wood",
+    Digit7: "redstone",
   };
   return keys[key];
 }

@@ -39,7 +39,7 @@ function App() {
       if (response.method === "update") {
         if (!response.game.state) return;
 
-        const cubes = response.game.state.cubes;        
+        const cubes = response.game.state.cubes;
         setCubesState((cubesState = cubes));
       }
 
@@ -71,7 +71,7 @@ function App() {
     };
 
     client.send(JSON.stringify(payLoad));
-  };  
+  };
 
   // Call this function when block is placed
   const onBlockPlaced = (mode, cubePos, cubeType, id) => {

@@ -33,7 +33,7 @@ const MaterialContainer = ({ args, color, activeTexture, ...props }) => {
             isActive={activeTextureIndex === index}
             texture={textures[key]}
             args={[0.2, 0.2, 0.05]}
-            position={[-0.6 + index / 4, 0, 0.01]}
+            position={[-0.7 + index / 4, 0, 0.01]}
           />
         );
       })}
@@ -81,7 +81,7 @@ export const Hud = ({ position }) => {
       <group position={hudState.position} rotation={hudState.rotation}>
         <group position={position}>
           <MaterialContainer
-            args={[1.8, 0.3, 0.01]}
+            args={[2, 0.3, 0.01]}
             color="#222"
             activeTexture={activeTexture}
             hudVisible={hudVisible}
