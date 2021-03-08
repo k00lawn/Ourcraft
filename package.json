@@ -10,6 +10,7 @@
     "nanoid": "^3.1.20",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-full-screen": "^1.0.1",
     "react-merge-refs": "^1.1.0",
     "react-scripts": "3.4.3",
     "react-spring": "^8.0.27",

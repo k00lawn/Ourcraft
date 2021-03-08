@@ -66,5 +66,5 @@ export const useKeyboardControls = () => {
     };
   }, [setTexture]);
 
-  return movement;
+  return [movement, setMovement];
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useSphere } from "use-cannon";
 import { useThree, useFrame } from "react-three-fiber";
 import { FPVControls } from "./FPVControls";
+import { FPVControlsMobile } from "./FPVControlsMobile";
 import { useKeyboardControls } from "../hooks/useKeyboardControls";
 import { Vector3 } from "three";
 
@@ -9,13 +10,10 @@ const SPEED = 6;
 
 export const Player = (props) => {
   const { camera } = useThree();
-  const {
-    moveForward,
-    moveBackward,
-    moveLeft,
-    moveRight,
-    jump,
-  } = useKeyboardControls();
+  const [
+    { moveForward, moveBackward, moveLeft, moveRight, jump },
+    setMovement,
+  ] = useKeyboardControls();
   const [ref, api] = useSphere(() => ({
     mass: 1,
     type: "Dynamic",
@@ -56,7 +54,7 @@ export const Player = (props) => {
   });
   return (
     <>
-      <FPVControls />
+      {props.isMobile ? <FPVControlsMobile /> : <FPVControls />}
       <mesh ref={ref} />
     </>
   );

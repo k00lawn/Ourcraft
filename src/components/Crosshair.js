@@ -9,6 +9,5 @@ export const Crosshair = (props) => {
     left: xC,
     top: yC,
   };
-
   return <div className="crossHair" style={position}></div>;
 };

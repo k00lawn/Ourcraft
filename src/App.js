@@ -8,13 +8,12 @@ import { Player } from "./components/Player";
 import { Hud } from "./components/Hud";
 import { Crosshair } from "./components/Crosshair";
 import { w3cwebsocket } from "websocket";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 const client = new w3cwebsocket("ws://127.0.0.7:9090");
-// const getLocalStorage = (key) => JSON.parse(window.localStorage.getItem(key));
-// const setLocalStorage = (key, value) =>
-//   window.localStorage.setItem(key, JSON.stringify(value));
 
 function App() {
+  const handle = useFullScreenHandle();
   const [{ x, y }] = useState({
     x: window.innerWidth / 2 - 10,
     y: window.innerHeight / 2 - 100,
@@ -92,11 +91,6 @@ function App() {
     client.send(JSON.stringify(payLoad));
   };
 
-  // const changeHandler = (e) => {
-  //   console.log("txt : ", txtGameId);
-  //   setTxtgameid(e.target.value);
-  // };
-
   return (
     <>
       <>
@@ -114,30 +108,33 @@ function App() {
               type="text"
               id="txtGameId"
               onChange={(e) => setTxtgameid(e.target.value)}
-              // value={gameId.length ? gameId : txtGameId}
             />
             <div id="divPlayers" style={{ border: "2px solid red" }}>
               {gameId}
             </div>
-            <div id="divBoard"></div>
+            <div id="divBoard">
+              <button onClick={handle.enter}>Enter fullscreen</button>
+            </div>
           </div>
           <script src="../server/index.js"></script>
         </div>
       </>
       <>
-        <Crosshair x={x} y={y} />
-        <Canvas shadowMap sRGB>
-          <Stars color="black" />
-          <Sky sunPosition={[100, 20, 100]} />
-          <ambientLight intensity={0.25} />
-          <pointLight castShadow intensity={0.7} position={[100, 100, 100]} />
-          <Hud position={[0, 1.1, -2]} />
-          <Physics gravity={[0, -30, 0]}>
-            <Ground position={[0, 0.5, 0]} onBlockPlaced={onBlockPlaced} />
-            <Player position={[0, 3, 10]} />
-            <Cubes onBlockPlaced={onBlockPlaced} cubesState={cubesState} />
-          </Physics>
-        </Canvas>
+        <FullScreen handle={handle}>
+          <Crosshair x={x} y={y} />
+          <Canvas shadowMap sRGB>
+            <Stars color="black" />
+            <Sky sunPosition={[100, 20, 100]} />
+            <ambientLight intensity={0.25} />
+            <pointLight castShadow intensity={0.7} position={[100, 100, 100]} />
+            <Hud position={[0, 1.1, -2]} />
+            <Physics gravity={[0, -30, 0]}>
+              <Ground position={[0, 0.5, 0]} onBlockPlaced={onBlockPlaced} />
+              <Player position={[0, 3, 10]} isMobile={false} />
+              <Cubes onBlockPlaced={onBlockPlaced} cubesState={cubesState} />
+            </Physics>
+          </Canvas>
+        </FullScreen>
       </>
     </>
   );
