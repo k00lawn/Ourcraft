@@ -29,7 +29,18 @@ function App() {
   const [showModal, setShowModal] = useState(true)
   const [hidePlayBtn, setHidePlayBtn] = useState(false)
   const [copiedId, setcopiedId] = useState('')
-  const { menu, hideBtn, txtStyle, inputBoxStyle, centerAlign} = style
+  const [showTouchControls, setShowTouchControls] = useState(true)
+  const { 
+          menu, 
+          hideBtn, 
+          txtStyle, 
+          inputBoxStyle, 
+          centerAlign, 
+          moveUpBtn, 
+          moveRightBtn,
+          moveDownBtn,
+          moveLeftBtn,
+          jumpBtn } = style
   const menuItems = [
     'Resume', 'Invite Players', 'help', 'quit'
   ]
@@ -130,6 +141,8 @@ function App() {
     
   }
 
+  
+
   const getMenuContent = () => {
     return (
       <div>
@@ -158,13 +171,12 @@ function App() {
             <div css={txtStyle}>World Id: {txtGameId}</div>
            <button css={txtStyle} onClick={() => navigator.clipboard.writeText(txtGameId)}>Copy</button>
           </div>: null}
-         
-          {/* <script src="../server/index.js"></script> */}
         </div>
       </>
       <>
         {txtGameId ? 
         (<>
+        
         <Crosshair x={x} y={y} />
         <Canvas shadowMap sRGB>
           <Stars color="black" />
@@ -189,6 +201,13 @@ function App() {
           children={getMenuContent()}
         />
       </>
+      { showTouchControls? <div style = {{  position: 'absolute', bottom: '20px'  }}>
+        <button css={moveUpBtn}>Up button</button>
+        <button css={moveRightBtn}>Right button</button>
+        <button css={moveDownBtn}>Down Button</button>
+        <button css={moveLeftBtn}>Left Button</button>
+        <button css={jumpBtn}>Jump Button</button>
+      </div> : null }
     </>
   );
 }
