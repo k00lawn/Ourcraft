@@ -42,6 +42,7 @@ function App() {
     moveDownBtn,
     moveLeftBtn,
     jumpBtn,
+    ctaBtn
   } = style;
   const menuItems = ["Resume", "Invite Players", "help", "quit"];
 
@@ -149,25 +150,25 @@ function App() {
             <div css={menu} onClick={closeModal}>{item}</div>
           )
         })} */}
-        <button css={hidePlayBtn ? hideBtn : menu} onClick={onPlay}>
+        <button css={hidePlayBtn ? hideBtn : [menu, ctaBtn]} onClick={onPlay}>
           Play
         </button>
         {hidePlayBtn ? (
           <div>
             <button
-              css={menu}
+              css={[menu, ctaBtn]}
               style={{ marginRight: "10px", marginBottom: "10px" }}
               onClick={() => onClickCreateWorld()}
             >
               Create World
             </button>
             <input
-              css={[inputBoxStyle, txtStyle]}
+              css={[inputBoxStyle, txtStyle, ctaBtn]}
               onChange={handleValueChange}
               placeholder="Enter  world  id "
               value={copiedId}
             />
-            <button css={menu} onClick={onClickJoinWorld}>
+            <button css={[menu, ctaBtn]} onClick={onClickJoinWorld}>
               Join World
             </button>
           </div>

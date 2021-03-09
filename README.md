@@ -4,6 +4,10 @@
 
 A blank canvas limited only to your creativity. Build impressive structures with limitless resources at your disposal. Enjoy the world at your own pace or tag along with some friends for some creative chaotic fun. Players can even create their own custom game modes by modifying assets,items and even mechanics! Giving a truly unique experience for each and every player. Welcome to Ourcraft.
 
+## Check out live game
+
+[Ourcraft](http://www.ourcraftjs.com/)
+
 ## Clone the repository
 
 Copy the repository link
@@ -32,13 +36,15 @@ open ```localhost:3000``` in your browser
 
 ## How to play
 
-```WASD``` to move player around
+```WASD``` to move around
 
 ```Left Mouse Button``` to place blocks
 
 ```Alt + Left Mouse button``` to destroy blocks
 
 ```Spacebar``` to jump
+
+```1 2 3 4 5 6 7``` to change blocks
 
 Have fun creating your own world :D
 

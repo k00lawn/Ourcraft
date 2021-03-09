@@ -7,7 +7,7 @@ export default {
     menu: css`
          width: 100%;
         background-color: white;
-        padding: 20px;
+        padding: 15px;
         border: 2px solid black;
         display: flex;
         justify-content: center;
@@ -36,7 +36,7 @@ export default {
          width: 80%;
          display: flex;
          margin: auto;
-         padding: 20px;
+         padding: 10px;
          background-color: white;
          margin-bottom:10px;
      `,
@@ -112,6 +112,15 @@ export default {
     `,
     arrows : css`
      font-size: 75px;
+    `,
+    ctaBtn: css`
+        @media (max-width: 450px ) {
+                height: 50px;
+                font-size: 1.3rem;
+                align-items: center;
+        }
+       
+    
     `
  
 }
