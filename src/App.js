@@ -9,6 +9,7 @@ import Cubes from "./components/Cubes";
 import { Player } from "./components/Player";
 import { Hud } from "./components/Hud";
 import { Crosshair } from "./components/Crosshair";
+import { TouchControls } from "./components/TouchControls"
 import { w3cwebsocket } from "websocket";
 import ModalComponent from './components/Modal'
 import style from './style'
@@ -201,13 +202,7 @@ function App() {
           children={getMenuContent()}
         />
       </>
-      { showTouchControls? <div style = {{  position: 'absolute', bottom: '20px'  }}>
-        <button css={moveUpBtn}>Up button</button>
-        <button css={moveRightBtn}>Right button</button>
-        <button css={moveDownBtn}>Down Button</button>
-        <button css={moveLeftBtn}>Left Button</button>
-        <button css={jumpBtn}>Jump Button</button>
-      </div> : null }
+      { showTouchControls? <TouchControls />: null }
     </>
   );
 }
