@@ -4,6 +4,8 @@ import { css, jsx } from '@emotion/core';
 import style from '../style'
 import { BiUpArrow, BiRightArrow, BiDownArrow, BiLeftArrow } from 'react-icons/bi'
 import { ImRadioUnchecked } from "react-icons/im"
+import { isMobile } from 'react-device-detect';
+
 
 
 export const TouchControls = () => {
@@ -20,8 +22,9 @@ export const TouchControls = () => {
 
 
     return (
-  
-        <div css={gameController}>
+  <>
+        {isMobile ?
+        ( <div css={gameController}>
             <div css={box}></div>
         <div css={box}><button css={[moveUpBtn, btn]}><BiUpArrow css={arrows} name="moveForward" /></button></div>
                 <div css={box}></div>
@@ -31,7 +34,8 @@ export const TouchControls = () => {
                 <div css={box}></div>
         <div css={box}><button css={[moveDownBtn, btn]}><BiDownArrow css={arrows} name="moveBackward" /></button></div>
                 <div css={box}></div>
-        </div>
+        </div>): null}
+        </>
     )     
 
 };
