@@ -1,28 +1,9 @@
 import React from "react";
 import { css, jsx } from "@emotion/core";
 import style from "../style";
-import { useKeyboardControls } from "../hooks/useKeyboardControls";
+// import { useKeyboardControls } from "../hooks/useKeyboardControls";
 
 export const TouchControls = () => {
-  // const {
-  //         moveRightBtn,
-  //         moveDownBtn,
-  //         moveLeftBtn,
-  //         jumpBtn } = style;
-
-  const [
-    { moveForward, moveBackward, moveLeft, moveRight, jump },
-    setMovement,
-  ] = useKeyboardControls();
-
-  //   const {
-  //     moveForward,
-  //     moveBackward,
-  //     moveLeft,
-  //     moveRight,
-  //     jump,
-  //   } = useKeyboardControls();
-
   const moveUpBtn = {
     top: "673px",
     left: "157px",
@@ -78,19 +59,19 @@ export const TouchControls = () => {
 
   return (
     <div style={{ position: "absolute", bottom: "20px" }}>
-      <button style={moveUpBtn} name="moveForward" onClick={setMovement}>
+      <button style={moveUpBtn} name="moveForward">
         Up button
       </button>
-      <button style={moveRightBtn} name="moveRight" onClick={setMovement}>
+      <button style={moveRightBtn} name="moveRight">
         Right button
       </button>
-      <button style={moveDownBtn} name="moveDown" onClick={setMovement}>
+      <button style={moveDownBtn} name="moveBackward">
         Down Button
       </button>
-      <button style={moveLeftBtn} name="moveLeft" onClick={setMovement}>
+      <button style={moveLeftBtn} name="moveLeft">
         Left Button
       </button>
-      <button style={jumpBtn} name="jump" onClick={setMovement}>
+      <button style={jumpBtn} name="jump">
         Jump Button
       </button>
     </div>
