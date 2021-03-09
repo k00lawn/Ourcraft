@@ -41,53 +41,77 @@ export default {
          margin-bottom:10px;
      `,
      moveUpBtn: css`
-        top: 673px;
+         top: 673px;
         left: 157px;
         width: 124px;
         height: 125px;
         background-color: grey;
         border: 3px solid #909090;
         border-radius: 67px;
-        opacity: 0.86;`,
+        opacity: 0.86
+        `,
+
+     gameController : css`
+       display: grid;
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        grid-template-rows: 125px 125px 125px;
+        grid-template-columns: 125px 125px 125px;
+     `,
     
     moveRightBtn: css`
-        left: 280px;
+         left: 280px;
         width: 125px;
         height: 124px;
         background-color: grey;
         border: 3px solid #909090;
         border-radius: 67px;
-        opacity: 0.86;`,
+        opacity: 0.86;
+        
+    `,
 
     moveDownBtn: css`
-        top: 921px;
+         top: 921px;
         left: 156px;
-        width: 124px;
-        height: 125px;
-        background-color: grey;
-        border: 3px solid #909090;
-        border-radius: 67px;
-        opacity: 0.86;`,
-
-    moveLeftBtn: css`
-        top: 797px;
-        left: 32px;
         width: 125px;
         height: 124px;
         background-color: grey;
         border: 3px solid #909090;
         border-radius: 67px;
-        opacity: 0.86;`,
+        opacity: 0.86;
+        `,
 
-    jumpBtn: css`
-        top: 812px;
-        left: 171px;
-        width: 95px;
-        height: 95px;
-        background-color: gray;
+    moveLeftBtn: css`
+        top: 921px;
+        left: 156px;
+        width: 125px;
+        height: 124px;
+        background-color: grey;
         border: 3px solid #909090;
         border-radius: 67px;
-        opacity: 0.86;`,
+        opacity: 0.86;
+        `,
 
+    jumpBtn: css`
+       top: 921px;
+        left: 156px;
+        width: 95px;
+        height: 95px;
+        background-color: grey;
+        border: 3px solid #909090;
+        border-radius: 67px;
+        opacity: 0.86;
+        `,
 
+     box : css`
+      display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #AAA;
+    `,
+    arrows : css`
+     font-size: 75px;
+    `
+ 
 }
