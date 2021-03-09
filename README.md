@@ -44,7 +44,7 @@ open ```localhost:3000``` in your browser
 
 ```Spacebar``` to jump
 
-```1 2 3 4 5 6 to change blocks```
+```1 2 3 4 5 6 7``` to change blocks
 
 Have fun creating your own world :D
 
