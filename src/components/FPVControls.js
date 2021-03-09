@@ -16,7 +16,6 @@ export const FPVControls = (props) => {
     controls.current.lock();
 
     document.addEventListener("keydown", (e) => {
-      console.log(controls);
       if (e.code === "KeyP") {
         controls.current.lock();
       }

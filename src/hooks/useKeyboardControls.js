@@ -69,16 +69,13 @@ export const useKeyboardControls = () => {
   return [
     movement,
     (e) => {
-      // setMovement({
-      //   ...movement,
-      //   [e.target.name]: true,
-      // });
-      console.log(e.target.name);
+      const { name } = e.target;
+
+      console.log(name);
       setMovement((state) => ({
         ...state,
-        [e.target.name]: true,
+        [name]: true,
       }));
     },
   ];
-  // return movement;
 };
