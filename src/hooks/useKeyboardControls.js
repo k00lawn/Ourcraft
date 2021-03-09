@@ -66,5 +66,19 @@ export const useKeyboardControls = () => {
     };
   }, [setTexture]);
 
-  return movement;
+  return [
+    movement,
+    (e) => {
+      // setMovement({
+      //   ...movement,
+      //   [e.target.name]: true,
+      // });
+      console.log(e.target.name);
+      setMovement((state) => ({
+        ...state,
+        [e.target.name]: true,
+      }));
+    },
+  ];
+  // return movement;
 };

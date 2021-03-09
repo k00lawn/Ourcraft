@@ -10,8 +10,16 @@ export const FPVControls = (props) => {
   const controls = useRef();
 
   useEffect(() => {
-    document.addEventListener("click", () => {
-      controls.current.lock();
+    // document.addEventListener("click", () => {
+    //   controls.current.lock();
+    // });
+    controls.current.lock();
+
+    document.addEventListener("keydown", (e) => {
+      console.log(controls);
+      if (e.code === "KeyP") {
+        controls.current.lock();
+      }
     });
   }, []);
 
