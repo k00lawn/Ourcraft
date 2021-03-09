@@ -188,7 +188,7 @@ function App() {
             <div css={centerAlign}>
               <div css={txtStyle}>World Id: {txtGameId}</div>
               <button
-                css={txtStyle}
+                css={[txtStyle, ctaBtn]}
                 onClick={() => navigator.clipboard.writeText(txtGameId)}
               >
                 Copy

@@ -15,7 +15,7 @@ export const TouchControls = () => {
             jumpBtn, 
             arrows,
             gameController, 
-            box
+      box, btn
         } = style;
 
 
@@ -23,35 +23,15 @@ export const TouchControls = () => {
   
         <div css={gameController}>
             <div css={box}></div>
-            <div css={box}><button css={moveUpBtn}><BiUpArrow css={arrows} name="moveForward" /></button></div>
+        <div css={box}><button css={[moveUpBtn, btn]}><BiUpArrow css={arrows} name="moveForward" /></button></div>
                 <div css={box}></div>
-            <div css={box}><button css={moveLeftBtn}><BiLeftArrow css={arrows} name="moveLeft"/></button></div>
-            <div css={box}><button css={jumpBtn}><ImRadioUnchecked css={{ "font-size": "50px" }} name="jump"/></button></div>
-        <div css={box}><button css={moveRightBtn}><BiRightArrow css={arrows} name="moveRight"/></button></div>
+        <div css={box}><button css={[moveLeftBtn, btn]}><BiLeftArrow css={arrows} name="moveLeft"/></button></div>
+        <div css={box}><button css={[jumpBtn, btn]}><ImRadioUnchecked css={{ "font-size": "30px" }} name="jump"/></button></div>
+        <div css={box}><button css={[moveRightBtn, btn]}><BiRightArrow css={arrows} name="moveRight"/></button></div>
                 <div css={box}></div>
-            <div css={box}><button css={moveDownBtn}><BiDownArrow css={arrows} name="moveBackward" /></button></div>
+        <div css={box}><button css={[moveDownBtn, btn]}><BiDownArrow css={arrows} name="moveBackward" /></button></div>
                 <div css={box}></div>
         </div>
     )     
 
-
-  // return (
-  //   <div style={{ position: "absolute", bottom: "20px" }}>
-  //     <button style={moveUpBtn} name="moveForward">
-  //       Up button
-  //     </button>
-  //     <button style={moveRightBtn} name="moveRight">
-  //       Right button
-  //     </button>
-  //     <button style={moveDownBtn} name="moveBackward">
-  //       Down Button
-  //     </button>
-  //     <button style={moveLeftBtn} name="moveLeft">
-  //       Left Button
-  //     </button>
-  //     <button style={jumpBtn} name="jump">
-  //       Jump Button
-  //     </button>
-  //   </div>
-  // );
 };

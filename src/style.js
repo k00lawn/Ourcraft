@@ -24,9 +24,12 @@ export default {
         display: none;
      `,
      txtStyle: css`
-      font-family: arcadeClassic;
-       font-size: 2rem;
-       text-align: center;
+            font-family: arcadeClassic;
+            font-size: 30px;
+            text-align: center;
+        @media (max-width: 450px ) {
+            font-size: 20px;
+        }
      `,
      centerAlign: css`
       display: flex ;
@@ -40,12 +43,19 @@ export default {
          background-color: white;
          margin-bottom:10px;
      `,
+     btn : css`
+        
+            width: 100%;
+            height: 100%;
+          background-color: grey;
+        //    @media (max-width: 450px ) {
+        //     width: 50px;
+        //     height:50px;
+        //  }
+     `,
      moveUpBtn: css`
          top: 673px;
         left: 157px;
-        width: 124px;
-        height: 125px;
-        background-color: grey;
         border: 3px solid #909090;
         border-radius: 67px;
         opacity: 0.86
@@ -56,16 +66,17 @@ export default {
         position: absolute;
         bottom: 10px;
         left: 10px;
-        grid-template-rows: 125px 125px 125px;
-        grid-template-columns: 125px 125px 125px;
+        grid-template-rows: 70px 70px 70px;
+        grid-template-columns: 70px 70px 70px;
+
+         @media (max-width: 450px ) {
+
+         }
      `,
     
     moveRightBtn: css`
          left: 280px;
-        width: 125px;
-        height: 124px;
-        background-color: grey;
-        border: 3px solid #909090;
+         border: 3px solid #909090;
         border-radius: 67px;
         opacity: 0.86;
         
@@ -74,9 +85,6 @@ export default {
     moveDownBtn: css`
          top: 921px;
         left: 156px;
-        width: 125px;
-        height: 124px;
-        background-color: grey;
         border: 3px solid #909090;
         border-radius: 67px;
         opacity: 0.86;
@@ -85,9 +93,6 @@ export default {
     moveLeftBtn: css`
         top: 921px;
         left: 156px;
-        width: 125px;
-        height: 124px;
-        background-color: grey;
         border: 3px solid #909090;
         border-radius: 67px;
         opacity: 0.86;
@@ -96,9 +101,7 @@ export default {
     jumpBtn: css`
        top: 921px;
         left: 156px;
-        width: 95px;
-        height: 95px;
-        background-color: grey;
+      
         border: 3px solid #909090;
         border-radius: 67px;
         opacity: 0.86;
@@ -109,9 +112,16 @@ export default {
         align-items: center;
         justify-content: center;
         color: #AAA;
+          width: 124px;
+          height: 125px;
+        @media (max-width: 450px ) {
+            width: 50px;
+            height:50px;
+         }
+
     `,
     arrows : css`
-     font-size: 75px;
+     font-size: 2rem;
     `,
     ctaBtn: css`
         @media (max-width: 450px ) {
