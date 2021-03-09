@@ -36,7 +36,7 @@ open ```localhost:3000``` in your browser
 
 ## How to play
 
-```WASD``` to move player around
+```WASD``` to move around
 
 ```Left Mouse Button``` to place blocks
 
