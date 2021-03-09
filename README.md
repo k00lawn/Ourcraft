@@ -6,7 +6,7 @@ A blank canvas limited only to your creativity. Build impressive structures with
 
 ## Check out live game
 
-[Ourcraft](http://139.59.24.176/)
+[Ourcraft](http://www.ourcraftjs.com/)
 
 ## Clone the repository
 
