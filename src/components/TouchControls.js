@@ -16,25 +16,46 @@ export const TouchControls = () => {
             moveLeftBtn,
             jumpBtn, 
             arrows,
-            gameController, 
+            gameController,
+            gameController2, 
       box, btn
         } = style;
+
+        //OnClickRemoveTouch change background color style to red
 
 
     return (
   <>
         {isMobile ?
-        ( <div css={gameController}>
+
+        ( 
+        <div>
+            <div css={gameController}>
             <div css={box}></div>
-        <div css={box}><button css={[moveUpBtn, btn]}><BiUpArrow css={arrows} name="moveForward" /></button></div>
+        <div css={box}><button css={[moveUpBtn, btn]} name="moveForward">Up</button></div>
+            <div css={box}></div>
+        <div css={box}><button css={[moveLeftBtn, btn]} name="moveLeft">Left</button></div>
+          <div css={box}></div>
+        <div css={box}><button css={[moveRightBtn, btn]} name="moveRight">Right</button></div>
                 <div css={box}></div>
-        <div css={box}><button css={[moveLeftBtn, btn]}><BiLeftArrow css={arrows} name="moveLeft"/></button></div>
-        <div css={box}><button css={[jumpBtn, btn]}><ImRadioUnchecked css={{ "font-size": "30px" }} name="jump"/></button></div>
-        <div css={box}><button css={[moveRightBtn, btn]}><BiRightArrow css={arrows} name="moveRight"/></button></div>
+        <div css={box}><button css={[moveDownBtn, btn]} name="moveBackward">Down</button></div>
                 <div css={box}></div>
-        <div css={box}><button css={[moveDownBtn, btn]}><BiDownArrow css={arrows} name="moveBackward" /></button></div>
-                <div css={box}></div>
-        </div>): null}
+        </div>
+
+        <div css={gameController2}>
+          <div css={box}></div>
+          <div css={box}></div>
+          <div css={box}></div>
+        <div css={box}><button css={[moveLeftBtn, btn]} name="moveLeft">BREAK</button></div>
+          <div css={box}></div>
+        <div css={box}><button css={[jumpBtn, btn]} name="jump">JUMP</button></div>
+          <div css={box}></div>
+          <div css={box}></div>
+          <div css={box}></div>
+        </div>
+
+        </div>
+        ): null}
         </>
     )     
 

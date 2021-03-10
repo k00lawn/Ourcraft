@@ -14,7 +14,7 @@ import { w3cwebsocket } from "websocket";
 import ModalComponent from "./components/Modal";
 import style from "./style";
 
-const client = new w3cwebsocket("ws://localhost:9090");
+const client = new w3cwebsocket("ws://192.168.1.13:9090");
 // const client = new w3cwebsocket("ws://192.168.1.9:9090");
 
 function App() {
@@ -30,6 +30,7 @@ function App() {
   const [showModal, setShowModal] = useState(true);
   const [hidePlayBtn, setHidePlayBtn] = useState(false);
   const [copiedId, setcopiedId] = useState("");
+  const [isMobile, setIsMobile] = useState(true)
   const [showTouchControls, setShowTouchControls] = useState(true);
   const {
     menu,
@@ -213,7 +214,7 @@ function App() {
               <Hud position={[0, 1.1, -2]} />
               <Physics gravity={[0, -30, 0]}>
                 <Ground position={[0, 0.5, 0]} onBlockPlaced={onBlockPlaced} />
-                <Player position={[0, 3, 10]} />
+                <Player position={[0, 3, 10]} isMobile={isMobile} />
                 <Cubes onBlockPlaced={onBlockPlaced} cubesState={cubesState} />
               </Physics>
             </Canvas>

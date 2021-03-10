@@ -69,6 +69,18 @@ export default {
     }
   `,
 
+  gameController2: css`
+  display: grid;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  grid-template-rows: 55px 55px 55px;
+  grid-template-columns: 55px 55px 55px;
+
+  @media (max-width: 450px) {
+  }
+`,
+
   moveRightBtn: css`
     left: 280px;
     border: 3px solid #909090;
