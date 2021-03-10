@@ -14,8 +14,8 @@ import { w3cwebsocket } from "websocket";
 import ModalComponent from "./components/Modal";
 import style from "./style";
 
-// const client = new w3cwebsocket("ws://localhost:9090");
-const client = new w3cwebsocket("ws://192.168.0.102:9090");
+const client = new w3cwebsocket("ws://localhost:9090");
+// const client = new w3cwebsocket("ws://192.168.0.102:9090");
 
 function App() {
   const [{ x, y }] = useState({
@@ -42,7 +42,7 @@ function App() {
     moveDownBtn,
     moveLeftBtn,
     jumpBtn,
-    ctaBtn
+    ctaBtn,
   } = style;
   const menuItems = ["Resume", "Invite Players", "help", "quit"];
 
