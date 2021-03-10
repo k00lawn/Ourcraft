@@ -14,8 +14,8 @@ import { w3cwebsocket } from "websocket";
 import ModalComponent from "./components/Modal";
 import style from "./style";
 
-// const client = new w3cwebsocket("ws://localhost:9090");
-const client = new w3cwebsocket("ws://192.168.1.9:9090");
+const client = new w3cwebsocket("ws://localhost:9090");
+// const client = new w3cwebsocket("ws://192.168.1.9:9090");
 
 function App() {
   const [{ x, y }] = useState({
@@ -44,6 +44,8 @@ function App() {
     jumpBtn,
   } = style;
   const menuItems = ["Resume", "Invite Players", "help", "quit"];
+  const [isMobile, setIsMobile] = useState(false);
+  const [users, setUsers] = useState(1);
 
   useEffect(() => {
     client.onmessage = (message) => {
@@ -130,7 +132,7 @@ function App() {
   };
 
   const onClickJoinWorld = () => {
-    joinGame();
+    if (txtGameId.length === 36) joinGame();
   };
 
   const handleValueChange = (e) => {
@@ -139,6 +141,21 @@ function App() {
       //length of gameID
       setTxtgameid(e.target.value);
     }
+  };
+
+  const num_of_users = {
+    position: "absolute",
+    right: "5px",
+    top: "3px",
+    opacity: "0.7",
+    backgroundColor: "black",
+    color: "white",
+    width: "40px",
+    height: "40px",
+    borderRadius: "10px",
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
   };
 
   const getMenuContent = () => {
@@ -180,9 +197,6 @@ function App() {
     <>
       <>
         <div>
-          <h1 css={txtStyle} style={{ fontSize: "3rem", margin: 0 }}>
-            Our Craft
-          </h1>
           {txtGameId ? (
             <div css={centerAlign}>
               <div css={txtStyle}>World Id: {txtGameId}</div>
@@ -194,6 +208,10 @@ function App() {
               </button>
             </div>
           ) : null}
+
+          <div className="users_num" style={num_of_users}>
+            {users}
+          </div>
         </div>
       </>
       <>
@@ -209,10 +227,10 @@ function App() {
                 intensity={0.7}
                 position={[100, 100, 100]}
               />
-              <Hud position={[0, 1.1, -2]} />
+              <Hud position={[0, 1.1, -2]} isMobile={isMobile} />
               <Physics gravity={[0, -30, 0]}>
                 <Ground position={[0, 0.5, 0]} onBlockPlaced={onBlockPlaced} />
-                <Player position={[0, 3, 10]} />
+                <Player position={[0, 3, 10]} isMobile={isMobile} />
                 <Cubes onBlockPlaced={onBlockPlaced} cubesState={cubesState} />
               </Physics>
             </Canvas>
