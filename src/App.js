@@ -13,9 +13,11 @@ import { TouchControls } from "./components/TouchControls";
 import { w3cwebsocket } from "websocket";
 import ModalComponent from "./components/Modal";
 import style from "./style";
+import Close from "./images/close.svg";
 
 // const client = new w3cwebsocket("ws://localhost:9090");
 const client = new w3cwebsocket("ws://192.168.0.102:9090");
+const copy = require('clipboard-copy')
 
 function App() {
   const [{ x, y }] = useState({
@@ -31,21 +33,19 @@ function App() {
   const [hidePlayBtn, setHidePlayBtn] = useState(false);
   const [copiedId, setcopiedId] = useState("");
   const [showTouchControls, setShowTouchControls] = useState(true);
+  const [showMenu, setShowMenu] = useState(false)
   const {
     menu,
     hideBtn,
     txtStyle,
     inputBoxStyle,
     centerAlign,
-    moveUpBtn,
-    moveRightBtn,
-    moveDownBtn,
-    moveLeftBtn,
-    jumpBtn,
-    ctaBtn
+    container,  copyBtnContainer,
+    ctaBtn, copyBtn, iconContainer, close
   } = style;
-  const menuItems = ["Resume", "Invite Players", "help", "quit"];
+  const gameIdList=[]
 
+  var storedNames = JSON.parse(localStorage.getItem("gameIDs"));
   useEffect(() => {
     client.onmessage = (message) => {
       const response = JSON.parse(message.data);
@@ -58,6 +58,9 @@ function App() {
       if (response.method === "create") {
         console.log("game successfully created with id " + response.game.id);
         setTxtgameid(response.game.id);
+        gameIdList.push(response.game.id)
+        localStorage.setItem("gameIDs", JSON.stringify(gameIdList));
+
       }
 
       if (response.method === "update") {
@@ -131,6 +134,7 @@ function App() {
   };
 
   const onClickJoinWorld = () => {
+    setShowMenu(false)
     joinGame();
   };
 
@@ -141,8 +145,15 @@ function App() {
       setTxtgameid(e.target.value);
     }
   };
+  
+  const handleKeyDown=(e) =>{
+    if (e.code === 'KeyM' || hidePlayBtn)
+      setShowMenu(true)
+  }
 
-  const getMenuContent = () => {
+  document.addEventListener("keydown", handleKeyDown);
+
+  const getModalContent = () => {
     return (
       <div>
         {/* {menuItems.map((item) => {
@@ -153,50 +164,84 @@ function App() {
         <button css={hidePlayBtn ? hideBtn : [menu, ctaBtn]} onClick={onPlay}>
           Play
         </button>
-        {hidePlayBtn ? (
-          <div>
-            <button
-              css={[menu, ctaBtn]}
-              style={{ marginRight: "10px", marginBottom: "10px" }}
-              onClick={() => onClickCreateWorld()}
-            >
-              Create World
-            </button>
-            <input
-              css={[inputBoxStyle, txtStyle, ctaBtn]}
-              onChange={handleValueChange}
-              placeholder="Enter  world  id "
-              value={copiedId}
-            />
-            <button css={[menu, ctaBtn]} onClick={onClickJoinWorld}>
-              Join World
-            </button>
-          </div>
-        ) : null}
+        {  hidePlayBtn ? getMenu() : null}
       </div>
     );
   };
 
+  const handleCopyClick =(item) =>{
+    navigator.clipboard.writeText(item)
+    console.log("item", item);
+    copy(item)
+  }
+
+  const closeMenu =() =>{
+    setShowMenu(false)
+  }
+
+  const getMenu =() =>{
+    return (
+      <>
+        {/* {txtGameId ? */}
+        <>
+            <div css={iconContainer} onClick={closeMenu}>
+              <img src={Close} alt="aClose" css={close}/>
+            </div>
+            <div css={[centerAlign, container]}>
+              {storedNames.map((item) =>{
+               return(
+                 <div css={copyBtnContainer}>
+                   <div css={txtStyle}>World Id: {item}</div>
+                    <button
+                      id="copyBtn"
+                      css={[txtStyle, ctaBtn, copyBtn]}
+                     onClick={() => handleCopyClick(item)}
+                    >
+                      Copy
+                    </button>
+                 </div>
+               ) 
+               
+              })}
+             
+            </div>
+
+            {/* {hidePlayBtn ? ( */}
+              <div>
+                <button
+                  css={[menu, ctaBtn]}
+                  style={{ marginRight: "10px", marginBottom: "10px" }}
+                  onClick={() => onClickCreateWorld()}
+                >
+                  Create World
+            </button>
+                <input
+                  css={[inputBoxStyle, txtStyle, ctaBtn]}
+                  onChange={handleValueChange}
+                  placeholder="Enter  world  id "
+                  value={copiedId}
+                />
+                <button css={[menu, ctaBtn]} onClick={onClickJoinWorld}>
+                  Join World
+            </button>
+              </div>
+            {/* ) : null} */}
+        </>
+        
+        {/* : null} */}
+      </>
+    )
+  }
+ 
+
   return (
     <>
-      <>
-        <div>
-          <h1 css={txtStyle} style={{ fontSize: "3rem", margin: 0 }}>
+        <div style={{ display :'flex'}}>
+          <span css={txtStyle} style={{ fontSize: "3rem", margin: 0 , flex:1}}>
             Our Craft
-          </h1>
-          {txtGameId ? (
-            <div css={centerAlign}>
-              <div css={txtStyle}>World Id: {txtGameId}</div>
-              <button
-                css={[txtStyle, ctaBtn]}
-                onClick={() => navigator.clipboard.writeText(txtGameId)}
-              >
-                Copy
-              </button>
-            </div>
-          ) : null}
+          </span>
         </div>
-      </>
+  
       <>
         {txtGameId ? (
           <>
@@ -226,8 +271,19 @@ function App() {
           headerText="menu"
           centerheader
           closeButton
-          children={getMenuContent()}
+          children={getModalContent()}
         />
+
+        <ModalComponent
+          open={showMenu}
+          onClose={showMenu}
+          headerText="menu"
+          centerheader
+          closeButton
+          children={getMenu()}
+        />
+
+
       </>
       {showTouchControls ? <TouchControls /> : null}
     </>

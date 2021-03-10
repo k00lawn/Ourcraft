@@ -13,7 +13,8 @@ export const FPVControls = (props) => {
   useEffect(() => {
     if (isBrowser){
       document.addEventListener("click", () => {
-        controls.current.lock();
+        if (!document.getElementById('copyBtn'))
+              controls.current.lock();
       });
     }
    
@@ -24,7 +25,7 @@ export const FPVControls = (props) => {
         }
       });
     }
-    controls.current.lock();
+    // controls.current.lock();
 
     
   }, []);

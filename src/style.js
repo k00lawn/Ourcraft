@@ -31,9 +31,36 @@ export default {
             font-size: 20px;
         }
      `,
+
+    closeContainer: css`
+        height: 300px;
+        opacity: 0.8;
+        
+    `,
+    close: css`
+            width: 40px;
+            height: 40px;
+            margin: 10px;
+    `,
+
+    iconContainer:css`
+       display: flex;
+       justify-content: flex-end;
+    `,
+    copyBtn: css`
+         max-height: 30px;
+    `,
+
+    copyBtnContainer: css`
+        display: flex;
+        justify-content: center;
+    `,
      centerAlign: css`
-      display: flex ;
-      justify-content: center;
+        display: flex ;
+        justify-content: center;
+        flex: 1;
+        background-color: white;
+        flex-direction: column;
      `,
      inputBoxStyle: css`
          width: 80%;
