@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSphere } from "use-cannon";
 import { useThree, useFrame } from "react-three-fiber";
 import { FPVControls } from "./FPVControls";
+// import { FPVControlsMobile } from "./FPVControlsMobile";
 import { useKeyboardControls } from "../hooks/useKeyboardControls";
 import { Vector3 } from "three";
 
@@ -16,9 +17,6 @@ export const Player = (props) => {
     moveRight,
     jump,
   } = useKeyboardControls();
-
-  console.log({ moveForward, moveBackward, moveLeft, moveRight, jump });
-
   const [ref, api] = useSphere(() => ({
     mass: 1,
     type: "Dynamic",
@@ -59,6 +57,7 @@ export const Player = (props) => {
   });
   return (
     <>
+      {/* {props.isMobile ? <FPVControlsMobile /> : <FPVControls />} */}
       <FPVControls />
       <mesh ref={ref} />
     </>

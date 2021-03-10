@@ -3,9 +3,16 @@ import { useFrame, useThree } from "react-three-fiber";
 import { useStore } from "../hooks/useStore";
 import * as textures from "../textures";
 
-const Material = ({ args, color, texture, isActive, ...props }) => {
+const Material = ({ args, color, texture, isActive, name, ...props }) => {
+  const [setTexture] = useStore((state) => [state.setTexture]);
   return (
-    <mesh {...props}>
+    <mesh
+      {...props}
+      name={name}
+      onClick={(e) => {
+        setTexture(name);
+      }}
+    >
       <boxBufferGeometry attach="geometry" args={args} />
       {[...Array(6)].map((_, index) => {
         return (
@@ -22,23 +29,61 @@ const Material = ({ args, color, texture, isActive, ...props }) => {
   );
 };
 
-const MaterialContainer = ({ args, color, activeTexture, ...props }) => {
+const Cubes = ({ texture, isActive, name }) => {
+  const src = texture.image.src;
+  console.log(src, name);
+  const box = {
+    flex: "1",
+    width: "25px",
+    height: "25px",
+  };
+
+  const img = {
+    maxWidth: "100%",
+    maxHeight: "100%",
+    display: "block",
+  };
+
+  return (
+    <div className="box" name={name} style={box}>
+      <img src={src} alt="texture" style={img} />
+    </div>
+  );
+};
+
+const MaterialContainer = ({
+  args,
+  color,
+  activeTexture,
+  isMobile,
+  ...props
+}) => {
   const activeTextureIndex = Object.keys(textures).indexOf(activeTexture);
   return (
     <mesh {...props}>
       {Object.keys(textures).map((key, index) => {
-        return (
+        return isMobile ? (
           <Material
             key={key}
+            name={key}
             isActive={activeTextureIndex === index}
             texture={textures[key]}
             args={[0.2, 0.2, 0.05]}
             position={[-0.7 + index / 4, 0, 0.01]}
+            // name={key}
           />
+        ) : (
+          <div className="container">
+            <Cubes
+              key={key}
+              isActive={activeTextureIndex === index}
+              texture={textures[key]}
+              name={key}
+            />
+          </div>
         );
       })}
       <boxBufferGeometry attach="geometry" args={args} />
-
       <meshStandardMaterial
         attach="material"
         color={color}
@@ -48,7 +93,7 @@ const MaterialContainer = ({ args, color, activeTexture, ...props }) => {
   );
 };
 
-export const Hud = ({ position }) => {
+export const Hud = ({ position, isMobile }) => {
   const { camera } = useThree();
   const [hudState, setHudState] = useState(() => ({
     position: camera.position,
@@ -68,13 +113,17 @@ export const Hud = ({ position }) => {
   });
 
   useEffect(() => {
-    setHudVisible(true);
-    const hudVisibilityTimeout = setTimeout(() => {
-      setHudVisible(false);
-    }, 2000);
-    return () => {
-      clearTimeout(hudVisibilityTimeout);
-    };
+    if (isMobile) {
+      setHudVisible(true);
+    } else {
+      setHudVisible(true);
+      const hudVisibilityTimeout = setTimeout(() => {
+        setHudVisible(false);
+      }, 2000);
+      return () => {
+        if (!isMobile) clearTimeout(hudVisibilityTimeout);
+      };
+    }
   }, [setHudVisible, activeTexture]);
   return (
     hudVisible && (
@@ -82,6 +131,7 @@ export const Hud = ({ position }) => {
         <group position={position}>
           <MaterialContainer
             args={[2, 0.3, 0.01]}
+            isMobile={isMobile}
             color="#222"
             activeTexture={activeTexture}
             hudVisible={hudVisible}

@@ -75,9 +75,15 @@ export const useKeyboardControls = () => {
       }));
     };
 
+    const handleClick = (e) => {
+      console.log(`${e.target.name} is clicked`);
+    };
+
+    //controls for keyboard
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
 
+    //controls for mobile
     const mf = document.getElementsByName("moveForward")[0];
     const mb = document.getElementsByName("moveBackward")[0];
     const mr = document.getElementsByName("moveRight")[0];
@@ -95,6 +101,18 @@ export const useKeyboardControls = () => {
     mr.addEventListener("touchend", handleTouchUp);
     ml.addEventListener("touchend", handleTouchUp);
     j.addEventListener("touchend", handleTouchUp);
+
+    //controls for mobile for textures
+    const t1 = document.getElementsByName("textureeee")[0];
+    const t2 = document.getElementsByName("glass")[1];
+    const t3 = document.getElementsByName("grass")[2];
+    const t4 = document.getElementsByName("log")[3];
+    const t5 = document.getElementsByName("diamond")[4];
+    const t6 = document.getElementsByName("wood")[5];
+    const t7 = document.getElementsByName("redstone")[6];
+
+    // t1.addEventListener("click", handleClick);
+    console.log(t1);
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);

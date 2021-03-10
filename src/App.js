@@ -14,8 +14,8 @@ import { w3cwebsocket } from "websocket";
 import ModalComponent from "./components/Modal";
 import style from "./style";
 
-// const client = new w3cwebsocket("ws://localhost:9090");
-const client = new w3cwebsocket("ws://192.168.1.9:9090");
+const client = new w3cwebsocket("ws://localhost:9090");
+// const client = new w3cwebsocket("ws://192.168.1.9:9090");
 
 function App() {
   const [{ x, y }] = useState({
@@ -180,9 +180,6 @@ function App() {
     <>
       <>
         <div>
-          <h1 css={txtStyle} style={{ fontSize: "3rem", margin: 0 }}>
-            Our Craft
-          </h1>
           {txtGameId ? (
             <div css={centerAlign}>
               <div css={txtStyle}>World Id: {txtGameId}</div>
@@ -209,7 +206,7 @@ function App() {
                 intensity={0.7}
                 position={[100, 100, 100]}
               />
-              <Hud position={[0, 1.1, -2]} />
+              <Hud position={[0, 1.1, -2]} isMobile={true} />
               <Physics gravity={[0, -30, 0]}>
                 <Ground position={[0, 0.5, 0]} onBlockPlaced={onBlockPlaced} />
                 <Player position={[0, 3, 10]} />
