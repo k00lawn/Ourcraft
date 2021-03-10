@@ -1,4 +1,6 @@
 import React from "react";
+import { isBrowser } from 'react-device-detect';
+
 
 export const Crosshair = (props) => {
   const xC = `${props.x}px`;
@@ -10,5 +12,10 @@ export const Crosshair = (props) => {
     top: yC,
   };
 
-  return <div className="crossHair" style={position}></div>;
+  return (
+
+    <>
+      {isBrowser ? <div className="crossHair" style={position}></div>: null}
+    </>
+  );
 };

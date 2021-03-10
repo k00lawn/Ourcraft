@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { PointerLockControls as PointerLockControlsImple } from "three/examples/jsm/controls/PointerLockControls";
 import { useThree, extend } from "react-three-fiber";
 import { useRef } from "react";
+import {  isBrowser } from 'react-device-detect';
 
 extend({ PointerLockControlsImple });
 
@@ -10,15 +11,22 @@ export const FPVControls = (props) => {
   const controls = useRef();
 
   useEffect(() => {
-    // const ch = document.getElementsByClassName("crossHair")[0];
-    // document.addEventListener("click", () => {
-    //   controls.current.lock();
-    // });
-    const lockAgain = (e) =>
-      e.code === "KeyP" ? controls.current.lock() : null;
-
+    if (isBrowser){
+      document.addEventListener("click", () => {
+        controls.current.lock();
+      });
+    }
+   
+    else {
+      document.addEventListener("keydown", (e) => {
+        if (e.code === "KeyP") {
+          controls.current.lock();
+        }
+      });
+    }
     controls.current.lock();
-    document.addEventListener("keydown", lockAgain);
+
+    
   }, []);
 
   return (

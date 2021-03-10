@@ -34,16 +34,16 @@ export const useKeyboardControls = () => {
   });
   const [setTexture] = useStore((state) => [state.setTexture]);
 
+  // console.log("movement : ", movement);
+
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Movement key
       if (actionByKey(e.code)) {
         setMovement((state) => ({
           ...state,
           [actionByKey(e.code)]: true,
         }));
       }
-      // Change texture key
       if (textureByKey(e.code)) {
         setTexture(textureByKey(e.code));
       }
@@ -84,33 +84,33 @@ export const useKeyboardControls = () => {
     const ml = document.getElementsByName("moveLeft")[0];
     const j = document.getElementsByName("jump")[0];
 
-    mf.addEventListener("touchstart", handleTouchDown);
-    mb.addEventListener("touchstart", handleTouchDown);
-    mr.addEventListener("touchstart", handleTouchDown);
-    ml.addEventListener("touchstart", handleTouchDown);
-    j.addEventListener("touchstart", handleTouchDown);
+    mf && mf.addEventListener("touchstart", handleTouchDown);
+    mb && mb.addEventListener("touchstart", handleTouchDown);
+    mr && mr.addEventListener("touchstart", handleTouchDown);
+    ml && ml.addEventListener("touchstart", handleTouchDown);
+    j && j.addEventListener("touchstart", handleTouchDown);
 
-    mf.addEventListener("touchend", handleTouchUp);
-    mb.addEventListener("touchend", handleTouchUp);
-    mr.addEventListener("touchend", handleTouchUp);
-    ml.addEventListener("touchend", handleTouchUp);
-    j.addEventListener("touchend", handleTouchUp);
+    mf &&  mf.addEventListener("touchend", handleTouchUp);
+    mb && mb.addEventListener("touchend", handleTouchUp);
+    mr && mr.addEventListener("touchend", handleTouchUp);
+    ml && ml.addEventListener("touchend", handleTouchUp);
+    j && j.addEventListener("touchend", handleTouchUp);
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keyup", handleKeyUp);
 
-      mf.removeEventListener("touchstart", handleTouchDown);
-      mb.removeEventListener("touchstart", handleTouchDown);
-      mr.removeEventListener("touchstart", handleTouchDown);
-      ml.removeEventListener("touchstart", handleTouchDown);
-      j.removeEventListener("touchstart", handleTouchDown);
+      mf && mf.removeEventListener("touchstart", handleTouchDown);
+      mb && mb.removeEventListener("touchstart", handleTouchDown);
+      mr && mr.removeEventListener("touchstart", handleTouchDown);
+      ml && ml.removeEventListener("touchstart", handleTouchDown);
+      j && j.removeEventListener("touchstart", handleTouchDown);
 
-      mf.removeEventListener("touchend", handleTouchUp);
-      mb.removeEventListener("touchend", handleTouchUp);
-      mr.removeEventListener("touchend", handleTouchUp);
-      ml.removeEventListener("touchend", handleTouchUp);
-      j.removeEventListener("touchend", handleTouchUp);
+      mf && mf.removeEventListener("touchend", handleTouchUp);
+      mb && mb.removeEventListener("touchend", handleTouchUp);
+      mr && mr.removeEventListener("touchend", handleTouchUp);
+      ml && ml.removeEventListener("touchend", handleTouchUp);
+      j && j.removeEventListener("touchend", handleTouchUp);
     };
   }, [setTexture]);
 

@@ -42,10 +42,9 @@ function App() {
     moveDownBtn,
     moveLeftBtn,
     jumpBtn,
+    ctaBtn,
   } = style;
   const menuItems = ["Resume", "Invite Players", "help", "quit"];
-  const [isMobile, setIsMobile] = useState(false);
-  const [users, setUsers] = useState(1);
 
   useEffect(() => {
     client.onmessage = (message) => {
@@ -132,7 +131,7 @@ function App() {
   };
 
   const onClickJoinWorld = () => {
-    if (txtGameId.length === 36) joinGame();
+    joinGame();
   };
 
   const handleValueChange = (e) => {
@@ -143,21 +142,6 @@ function App() {
     }
   };
 
-  const num_of_users = {
-    position: "absolute",
-    right: "5px",
-    top: "3px",
-    opacity: "0.7",
-    backgroundColor: "black",
-    color: "white",
-    width: "40px",
-    height: "40px",
-    borderRadius: "10px",
-    display: "flex",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-  };
-
   const getMenuContent = () => {
     return (
       <div>
@@ -166,25 +150,25 @@ function App() {
             <div css={menu} onClick={closeModal}>{item}</div>
           )
         })} */}
-        <button css={hidePlayBtn ? hideBtn : menu} onClick={onPlay}>
+        <button css={hidePlayBtn ? hideBtn : [menu, ctaBtn]} onClick={onPlay}>
           Play
         </button>
         {hidePlayBtn ? (
           <div>
             <button
-              css={menu}
+              css={[menu, ctaBtn]}
               style={{ marginRight: "10px", marginBottom: "10px" }}
               onClick={() => onClickCreateWorld()}
             >
               Create World
             </button>
             <input
-              css={[inputBoxStyle, txtStyle]}
+              css={[inputBoxStyle, txtStyle, ctaBtn]}
               onChange={handleValueChange}
               placeholder="Enter  world  id "
               value={copiedId}
             />
-            <button css={menu} onClick={onClickJoinWorld}>
+            <button css={[menu, ctaBtn]} onClick={onClickJoinWorld}>
               Join World
             </button>
           </div>
@@ -197,21 +181,20 @@ function App() {
     <>
       <>
         <div>
+          <h1 css={txtStyle} style={{ fontSize: "3rem", margin: 0 }}>
+            Our Craft
+          </h1>
           {txtGameId ? (
             <div css={centerAlign}>
               <div css={txtStyle}>World Id: {txtGameId}</div>
               <button
-                css={txtStyle}
+                css={[txtStyle, ctaBtn]}
                 onClick={() => navigator.clipboard.writeText(txtGameId)}
               >
                 Copy
               </button>
             </div>
           ) : null}
-
-          <div className="users_num" style={num_of_users}>
-            {users}
-          </div>
         </div>
       </>
       <>
@@ -227,10 +210,10 @@ function App() {
                 intensity={0.7}
                 position={[100, 100, 100]}
               />
-              <Hud position={[0, 1.1, -2]} isMobile={isMobile} />
+              <Hud position={[0, 1.1, -2]} />
               <Physics gravity={[0, -30, 0]}>
                 <Ground position={[0, 0.5, 0]} onBlockPlaced={onBlockPlaced} />
-                <Player position={[0, 3, 10]} isMobile={isMobile} />
+                <Player position={[0, 3, 10]} />
                 <Cubes onBlockPlaced={onBlockPlaced} cubesState={cubesState} />
               </Physics>
             </Canvas>

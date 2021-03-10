@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSphere } from "use-cannon";
 import { useThree, useFrame } from "react-three-fiber";
 import { FPVControls } from "./FPVControls";
@@ -17,6 +17,9 @@ export const Player = (props) => {
     moveRight,
     jump,
   } = useKeyboardControls();
+
+  console.log({ moveForward, moveBackward, moveLeft, moveRight, jump });
+
   const [ref, api] = useSphere(() => ({
     mass: 1,
     type: "Dynamic",
