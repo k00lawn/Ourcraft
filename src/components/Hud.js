@@ -3,9 +3,16 @@ import { useFrame, useThree } from "react-three-fiber";
 import { useStore } from "../hooks/useStore";
 import * as textures from "../textures";
 
-const Material = ({ args, color, texture, isActive, ...props }) => {
+const Material = ({ args, color, texture, isActive, name, ...props }) => {
+  const [setTexture] = useStore((state) => [state.setTexture]);
   return (
-    <mesh {...props}>
+    <mesh
+      {...props}
+      name={name}
+      onClick={(e) => {
+        setTexture(name);
+      }}
+    >
       <boxBufferGeometry attach="geometry" args={args} />
       {[...Array(6)].map((_, index) => {
         return (
@@ -30,6 +37,7 @@ const MaterialContainer = ({ args, color, activeTexture, ...props }) => {
         return (
           <Material
             key={key}
+            name={key}
             isActive={activeTextureIndex === index}
             texture={textures[key]}
             args={[0.2, 0.2, 0.05]}
@@ -48,7 +56,7 @@ const MaterialContainer = ({ args, color, activeTexture, ...props }) => {
   );
 };
 
-export const Hud = ({ position }) => {
+export const Hud = ({ position, isMobile }) => {
   const { camera } = useThree();
   const [hudState, setHudState] = useState(() => ({
     position: camera.position,
@@ -68,13 +76,17 @@ export const Hud = ({ position }) => {
   });
 
   useEffect(() => {
-    setHudVisible(true);
-    const hudVisibilityTimeout = setTimeout(() => {
-      setHudVisible(false);
-    }, 2000);
-    return () => {
-      clearTimeout(hudVisibilityTimeout);
-    };
+    if (isMobile) {
+      setHudVisible(true);
+    } else {
+      setHudVisible(true);
+      const hudVisibilityTimeout = setTimeout(() => {
+        setHudVisible(false);
+      }, 2000);
+      return () => {
+        clearTimeout(hudVisibilityTimeout);
+      };
+    }
   }, [setHudVisible, activeTexture]);
   return (
     hudVisible && (

@@ -31,8 +31,9 @@ function App() {
   const [showModal, setShowModal] = useState(true);
   const [hidePlayBtn, setHidePlayBtn] = useState(false);
   const [copiedId, setcopiedId] = useState("");
-  const [isMobile, setIsMobile] = useState(true)
+  const [isMobile, setIsMobile] = useState(false);
   const [showTouchControls, setShowTouchControls] = useState(true);
+  const [users, setUsers] = useState(1);
   const {
     menu,
     hideBtn,
@@ -47,6 +48,21 @@ function App() {
     ctaBtn,
   } = style;
   const menuItems = ["Resume", "Invite Players", "help", "quit"];
+
+  const usersNum = {
+    width: "30px",
+    height: "30px",
+    backgroundColor: "black",
+    opacity: "0.7",
+    color: "white",
+    borderRadius: "10px",
+    position: "absolute",
+    right: "5px",
+    top: "3px",
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  };
 
   useEffect(() => {
     client.onmessage = (message) => {
@@ -183,9 +199,6 @@ function App() {
     <>
       <>
         <div>
-          <h1 css={txtStyle} style={{ fontSize: "3rem", margin: 0 }}>
-            Our Craft
-          </h1>
           {txtGameId ? (
             <div css={centerAlign}>
               <div css={txtStyle}>World Id: {txtGameId}</div>
@@ -197,6 +210,9 @@ function App() {
               </button>
             </div>
           ) : null}
+          <div className="user_number" style={usersNum}>
+            {users}
+          </div>
         </div>
       </>
       <>
@@ -204,15 +220,22 @@ function App() {
           <>
             <Crosshair x={x} y={y} />
             <Canvas shadowMap sRGB>
-              <Stars color="black" />
-              <Sky sunPosition={[100, 20, 100]} />
+              <Stars
+                radius={500}
+                count={100000}
+                factor={8}
+                saturation={1}
+                // depth={10}
+                fade
+              />
+              <Sky sunPosition={[10000, 200, 100]} distance={4500000} />
               <ambientLight intensity={0.25} />
               <pointLight
                 castShadow
                 intensity={0.7}
                 position={[100, 100, 100]}
               />
-              <Hud position={[0, 1.1, -2]} />
+              <Hud position={[0, 1.1, -2]} isMobile={isMobile} />
               <Physics gravity={[0, -30, 0]}>
                 <Ground position={[0, 0.5, 0]} onBlockPlaced={onBlockPlaced} />
                 <Player position={[0, 3, 10]} isMobile={isMobile} />
@@ -231,7 +254,9 @@ function App() {
           children={getMenuContent()}
         />
       </>
-      {showTouchControls ? <TouchControls /> : null}
+      {showTouchControls ? (
+        <TouchControls isMob={(val) => setIsMobile(val)} />
+      ) : null}
     </>
   );
 }
