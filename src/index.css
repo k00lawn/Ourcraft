@@ -64,8 +64,16 @@ body {
   z-index: 9;
 }
 
-
 @font-face {
-  font-family: 'arcadeClassic';
+  font-family: "arcadeClassic";
   src: url(assets/ARCADECLASSIC.TTF);
+}
+
+#mobileControls {
+  border: none;
+  outline: none;
+}
+#mobileControls:focus {
+  border: none;
+  outline: none;
 }

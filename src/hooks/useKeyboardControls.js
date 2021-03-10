@@ -57,12 +57,60 @@ export const useKeyboardControls = () => {
       }
     };
 
+    const handleTouchDown = (e) => {
+      const { name } = e.target;
+      console.log(name);
+      setMovement((state) => ({
+        ...state,
+        [name]: true,
+      }));
+    };
+
+    const handleTouchUp = (e) => {
+      const { name } = e.target;
+      console.log(name, " false");
+      setMovement((state) => ({
+        ...state,
+        [name]: false,
+      }));
+    };
+
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
+
+    const mf = document.getElementsByName("moveForward")[0];
+    const mb = document.getElementsByName("moveBackward")[0];
+    const mr = document.getElementsByName("moveRight")[0];
+    const ml = document.getElementsByName("moveLeft")[0];
+    const j = document.getElementsByName("jump")[0];
+
+    mf.addEventListener("touchstart", handleTouchDown);
+    mb.addEventListener("touchstart", handleTouchDown);
+    mr.addEventListener("touchstart", handleTouchDown);
+    ml.addEventListener("touchstart", handleTouchDown);
+    j.addEventListener("touchstart", handleTouchDown);
+
+    mf.addEventListener("touchend", handleTouchUp);
+    mb.addEventListener("touchend", handleTouchUp);
+    mr.addEventListener("touchend", handleTouchUp);
+    ml.addEventListener("touchend", handleTouchUp);
+    j.addEventListener("touchend", handleTouchUp);
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keyup", handleKeyUp);
+
+      mf.removeEventListener("touchstart", handleTouchDown);
+      mb.removeEventListener("touchstart", handleTouchDown);
+      mr.removeEventListener("touchstart", handleTouchDown);
+      ml.removeEventListener("touchstart", handleTouchDown);
+      j.removeEventListener("touchstart", handleTouchDown);
+
+      mf.removeEventListener("touchend", handleTouchUp);
+      mb.removeEventListener("touchend", handleTouchUp);
+      mr.removeEventListener("touchend", handleTouchUp);
+      ml.removeEventListener("touchend", handleTouchUp);
+      j.removeEventListener("touchend", handleTouchUp);
     };
   }, [setTexture]);
 
