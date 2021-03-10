@@ -1,21 +1,22 @@
 import React, { useEffect, useRef } from "react";
 import { useThree, extend } from "react-three-fiber";
-import { PointerLockControls as forMobile } from "./mobilecontrol";
+import { PointerLockControls as PointerLockControlsImpl } from "./mobilecontrol";
 
-extend({ forMobile });
+extend({ PointerLockControlsImpl });
 
 export const FPVControlsMobile = (props) => {
   const { camera, gl } = useThree();
-  //   const controls = useRef();
-  //   useEffect(() => {
-  //     document.addEventListener("click", () => {
-  //       controls.current.lock();
-  //     });
-  //   }, []);
+  const controls = useRef();
+
+  useEffect(() => {
+    document.addEventListener("click", () => {
+      controls.current.lock();
+    });
+  }, []);
 
   return (
-    <pointerLockControls
-      // ref={controls}
+    <pointerLockControlsImpl
+      ref={controls}
       args={[camera, gl.domElement]}
       {...props}
     />

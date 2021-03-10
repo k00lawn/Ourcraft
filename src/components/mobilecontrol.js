@@ -1,20 +1,24 @@
 import { Euler, EventDispatcher, Vector3 } from "three";
 
+var mobile;
+mobile = false;
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+var ww = document.body.clientWidth / 2;
+var wh = document.body.clientHeight / 0.2;
+
+var h = window.innerHeight;
+
 var PointerLockControls = function (camera, domElement) {
-  var mobile;
-  mobile = false;
-  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-  var ww = document.body.clientWidth / 2;
-  var wh = document.body.clientHeight / 0.2;
-
-  var h = window.innerHeight;
   if (isMobile) {
     mobile = true;
   } else {
     mobile = false;
   }
 
+  // mobile = true;
+
+  console.log("domeelem is : ", domElement);
   if (domElement === undefined) {
     console.warn(
       'THREE.PointerLockControls: The second parameter "domElement" is now mandatory.'
@@ -25,6 +29,8 @@ var PointerLockControls = function (camera, domElement) {
   this.domElement = domElement;
   this.isLocked = false;
 
+  this.minPolarAngle = 0; // radians
+  this.maxPolarAngle = Math.PI; // radians
   var scope = this;
 
   var changeEvent = { type: "change" };
@@ -52,15 +58,23 @@ var PointerLockControls = function (camera, domElement) {
     xfromtouch = clientX - ww;
     yfromtouch = clientY - (h - 100);
     euler.setFromQuaternion(camera.quaternion);
-    euler.y = xfromtouch * 0.005;
-    euler.x = yfromtouch * 0.005;
-    euler.x = Math.max(-PI_2, Math.min(PI_2_mobile, euler.x));
+    euler.y = xfromtouch * 0.002;
+    euler.x = yfromtouch * 0.002;
+    euler.x = Math.max(
+      PI_2 - scope.maxPolarAngle,
+      Math.min(PI_2_mobile, euler.x)
+    );
+    // euler.x = Math.max(-PI_2, Math.min(PI_2_mobile, euler.x));
     euler.y = Math.max(-PI_2y, Math.min(PI_2y, euler.y));
+
     camera.quaternion.setFromEuler(euler);
     scope.dispatchEvent(changeEvent);
     console.log(yfromtouch);
   }
-  function onTouchEnd(e) {}
+  function onTouchEnd(e) {
+    lastxpos = euler.y;
+    lastypos = euler.x;
+  }
   function onMouseMove(event) {
     if (scope.isLocked === false) return;
     var movementX =
@@ -77,11 +91,15 @@ var PointerLockControls = function (camera, domElement) {
   }
 
   function onPointerlockChange() {
-    if (document.pointerLockElement === scope.domElement) {
+    if (
+      scope.domElement.ownerDocument.pointerLockElement === scope.domElement
+    ) {
       scope.dispatchEvent(lockEvent);
+
       scope.isLocked = true;
     } else {
       scope.dispatchEvent(unlockEvent);
+
       scope.isLocked = false;
     }
   }

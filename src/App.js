@@ -120,21 +120,21 @@ function App() {
         </div>
       </>
       <>
-        <FullScreen handle={handle}>
-          <Crosshair x={x} y={y} />
-          <Canvas shadowMap sRGB>
-            <Stars color="black" />
-            <Sky sunPosition={[100, 20, 100]} />
-            <ambientLight intensity={0.25} />
-            <pointLight castShadow intensity={0.7} position={[100, 100, 100]} />
-            <Hud position={[0, 1.1, -2]} />
-            <Physics gravity={[0, -30, 0]}>
-              <Ground position={[0, 0.5, 0]} onBlockPlaced={onBlockPlaced} />
-              <Player position={[0, 3, 10]} isMobile={false} />
-              <Cubes onBlockPlaced={onBlockPlaced} cubesState={cubesState} />
-            </Physics>
-          </Canvas>
-        </FullScreen>
+        {/* <FullScreen handle={handle}> */}
+        <Crosshair x={x} y={y} />
+        <Canvas shadowMap sRGB>
+          <Stars color="black" />
+          <Sky sunPosition={[100, 20, 100]} />
+          <ambientLight intensity={0.25} />
+          <pointLight castShadow intensity={0.7} position={[100, 100, 100]} />
+          <Hud position={[0, 1.1, -2]} />
+          <Physics gravity={[0, -30, 0]}>
+            <Ground position={[0, 0.5, 0]} onBlockPlaced={onBlockPlaced} />
+            <Player position={[0, 3, 10]} isMobile={true} />
+            <Cubes onBlockPlaced={onBlockPlaced} cubesState={cubesState} />
+          </Physics>
+        </Canvas>
+        {/* </FullScreen> */}
       </>
     </>
   );

@@ -10,10 +10,13 @@ const SPEED = 6;
 
 export const Player = (props) => {
   const { camera } = useThree();
-  const [
-    { moveForward, moveBackward, moveLeft, moveRight, jump },
-    setMovement,
-  ] = useKeyboardControls();
+  const {
+    moveForward,
+    moveBackward,
+    moveLeft,
+    moveRight,
+    jump,
+  } = useKeyboardControls();
   const [ref, api] = useSphere(() => ({
     mass: 1,
     type: "Dynamic",
