@@ -41,11 +41,6 @@ function App() {
     txtStyle,
     inputBoxStyle,
     centerAlign,
-    moveUpBtn,
-    moveRightBtn,
-    moveDownBtn,
-    moveLeftBtn,
-    jumpBtn,
     ctaBtn,
   } = style;
   const menuItems = ["Resume", "Invite Players", "help", "quit"];
@@ -89,6 +84,7 @@ function App() {
       //join
       if (response.method === "join") {
         const game = response.game;
+        setUsers(response.clients)
         console.log(game);
       }
     };
