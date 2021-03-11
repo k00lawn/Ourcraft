@@ -14,9 +14,9 @@ import { w3cwebsocket } from "websocket";
 import ModalComponent from "./components/Modal";
 import style from "./style";
 
-const client = new w3cwebsocket("ws://localhost:9090");
+// const client = new w3cwebsocket("ws://localhost:9090");
 // const client = new w3cwebsocket("ws://192.168.1.13:9090");
-// const client = new w3cwebsocket("ws://192.168.1.9:9090");
+const client = new w3cwebsocket("ws://192.168.1.42:9090");
 
 function App() {
   const [{ x, y }] = useState({

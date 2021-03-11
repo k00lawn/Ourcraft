@@ -18,8 +18,6 @@ export const Player = (props) => {
     jump,
   } = useKeyboardControls();
 
-  console.log({ moveForward, moveBackward, moveLeft, moveRight, jump });
-
   const [ref, api] = useSphere(() => ({
     mass: 1,
     type: "Dynamic",
