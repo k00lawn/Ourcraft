@@ -232,6 +232,7 @@ function App() {
         {txtGameId ? (
           <>
             <Crosshair x={x} y={y} />
+            {showTouchControls ? <TouchControls isMob={checkIsMobile} /> : null}
             <Canvas shadowMap sRGB>
               <Stars
                 radius={100}
@@ -275,8 +276,7 @@ function App() {
           children={getMenu()}
         />
       </>
-      {/* {showTouchControls ? <TouchControls isMob={checkIsMobile} /> : null} */}
-      <TouchControls isMob={checkIsMobile} />
+      {/* <TouchControls isMob={checkIsMobile} /> */}
     </>
   );
 }
