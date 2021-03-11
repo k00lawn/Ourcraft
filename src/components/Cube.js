@@ -18,6 +18,19 @@ const Cube = ({
     position,
   }));
 
+  const[remove, setRemove] = useState(false) 
+  const removeKey = document.getElementsByName("remove")[0]
+  
+
+  const toggleRemove  = (e) => {
+    setRemove(!remove)
+  }
+
+  if(removeKey !== undefined) {
+    removeKey.addEventListener("click", toggleRemove)
+    remove ? removeKey.style.setProperty("background-color", "red") : removeKey.style.setProperty("background-color", "grey")
+  }
+
   const color = texture === "glass" ? "skyblue" : "white";
   // useEffect(() => {
   //   onBlockPlaced(id, position, texture);
@@ -43,7 +56,7 @@ const Cube = ({
         const { x, y, z } = ref.current.position;
         if (clickedFace === 0) {
           // e.altKey ? removeCube(x, y, z) : addCube(x + 1, y, z);
-          if (e.altKey) {
+          if (e.altKey || remove) {
             onBlockPlaced("remove", [x, y, z], activeTexture, id);
             removeCube(x, y, z);
           } else {
@@ -55,7 +68,7 @@ const Cube = ({
         }
         if (clickedFace === 1) {
           // e.altKey ? removeCube(x, y, z) : addCube(x - 1, y, z);
-          if (e.altKey) {
+          if (e.altKey || remove) {
             onBlockPlaced("remove", [x, y, z], activeTexture, id);
             removeCube(x, y, z);
           } else {
@@ -67,7 +80,7 @@ const Cube = ({
         }
         if (clickedFace === 2) {
           // e.altKey ? removeCube(x, y, z) : addCube(x, y + 1, z);
-          if (e.altKey) {
+          if (e.altKey || remove) {
             onBlockPlaced("remove", [x, y, z], activeTexture, id);
             removeCube(x, y, z);
           } else {
@@ -79,7 +92,7 @@ const Cube = ({
         }
         if (clickedFace === 3) {
           // e.altKey ? removeCube(x, y, z) : addCube(x, y - 1, z);
-          if (e.altKey) {
+          if (e.altKey || remove) {
             onBlockPlaced("remove", [x, y, z], activeTexture, id);
             removeCube(x, y, z);
           } else {
@@ -91,7 +104,7 @@ const Cube = ({
         }
         if (clickedFace === 4) {
           // e.altKey ? removeCube(x, y, z) : addCube(x, y, z + 1);
-          if (e.altKey) {
+          if (e.altKey || remove) {
             onBlockPlaced("remove", [x, y, z], activeTexture, id);
             removeCube(x, y, z);
           } else {
@@ -103,7 +116,7 @@ const Cube = ({
         }
         if (clickedFace === 5) {
           // e.altKey ? removeCube(x, y, z) : addCube(x, y, z - 1);
-          if (e.altKey) {
+          if (e.altKey || remove) {
             onBlockPlaced("remove", [x, y, z], activeTexture, id);
             removeCube(x, y, z);
           } else {

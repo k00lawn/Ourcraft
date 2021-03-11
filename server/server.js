@@ -41,7 +41,7 @@ wsServer.on("request", (request) => {
 
     //a client want to join
     if (result.method === "join") {
-      if (!result.gameId) {
+      if (!result.gameId || !result.clientId) {
         return;
       }
 
@@ -53,11 +53,13 @@ wsServer.on("request", (request) => {
       });
       //start the game
       if (game.clients.length > 0) updateGameState();
-
+      
       const payLoad = {
         method: "join",
         game: game,
+        clients: game.clients.length
       };
+
       //loop through all clients and tell them that people has joined
       game.clients.forEach((c) => {
         clients[c.clientId].connection.send(JSON.stringify(payLoad));
