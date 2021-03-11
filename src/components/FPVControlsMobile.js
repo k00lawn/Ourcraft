@@ -9,9 +9,7 @@ export const FPVControlsMobile = (props) => {
   const controls = useRef();
 
   useEffect(() => {
-    document.addEventListener("click", () => {
-      controls.current.lock();
-    });
+    controls.current.lock();
   }, []);
 
   return (

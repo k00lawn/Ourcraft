@@ -33,16 +33,9 @@ function App() {
   const [copiedId, setcopiedId] = useState("");
   const [isMobile, setIsMobile] = useState(false);
   const [showTouchControls, setShowTouchControls] = useState(true);
-  const [showMenu, setShowMenu] = useState(false)
+  const [showMenu, setShowMenu] = useState(false);
   const [users, setUsers] = useState(1);
-  const {
-    menu,
-    hideBtn,
-    txtStyle,
-    inputBoxStyle,
-    centerAlign,
-    ctaBtn,
-  } = style;
+  const { menu, hideBtn, txtStyle, inputBoxStyle, centerAlign, ctaBtn } = style;
   const menuItems = ["Resume", "Invite Players", "help", "quit"];
 
   const usersNum = {
@@ -84,7 +77,7 @@ function App() {
       //join
       if (response.method === "join") {
         const game = response.game;
-        setUsers(response.clients)
+        setUsers(response.clients);
         console.log(game);
       }
     };
@@ -143,12 +136,12 @@ function App() {
   };
   const onClickCreateWorld = () => {
     createNewGame();
-    setShowMenu(false)
+    setShowMenu(false);
   };
 
   const onClickJoinWorld = () => {
     joinGame();
-    setShowMenu(false)
+    setShowMenu(false);
   };
 
   const handleValueChange = (e) => {
@@ -160,10 +153,8 @@ function App() {
   };
 
   const handleKeyDown = (e) => {
-    if (e.code === 'KeyM')
-      setShowMenu(true)
-  }
-
+    if (e.code === "KeyM") setShowMenu(true);
+  };
 
   document.addEventListener("keydown", handleKeyDown);
 
@@ -177,20 +168,24 @@ function App() {
             onClick={() => onClickCreateWorld()}
           >
             Create World
-            </button>
+          </button>
           <input
             css={[inputBoxStyle, txtStyle, ctaBtn]}
             onChange={handleValueChange}
             placeholder="Enter  world  id "
             value={copiedId}
           />
-          <button css={[menu, ctaBtn]} onClick={onClickJoinWorld} disabled={copiedId.length !== 36 ? true : false}>
+          <button
+            css={[menu, ctaBtn]}
+            onClick={onClickJoinWorld}
+            disabled={copiedId.length !== 36 ? true : false}
+          >
             Join World
-            </button>
+          </button>
         </div>
       </>
-    )
-  }
+    );
+  };
 
   const getMenuContent = () => {
     return (
@@ -203,9 +198,14 @@ function App() {
         <button css={hidePlayBtn ? hideBtn : [menu, ctaBtn]} onClick={onPlay}>
           Play
         </button>
-        {  hidePlayBtn  ? getMenu() : null}
-       </div>
+        {hidePlayBtn ? getMenu() : null}
+      </div>
     );
+  };
+
+  const checkIsMobile = () => {
+    console.log("check mob func is called");
+    // setIsMobile(true)
   };
 
   return (
@@ -275,9 +275,8 @@ function App() {
           children={getMenu()}
         />
       </>
-      {showTouchControls ? (
-        <TouchControls isMob={(val) => setIsMobile(val)} />
-      ) : null}
+      {/* {showTouchControls ? <TouchControls isMob={checkIsMobile} /> : null} */}
+      <TouchControls isMob={checkIsMobile} />
     </>
   );
 }
