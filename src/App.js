@@ -33,6 +33,7 @@ function App() {
   const [copiedId, setcopiedId] = useState("");
   const [isMobile, setIsMobile] = useState(false);
   const [showTouchControls, setShowTouchControls] = useState(true);
+  const [showMenu, setShowMenu] = useState(false)
   const [users, setUsers] = useState(1);
   const {
     menu,
@@ -146,10 +147,12 @@ function App() {
   };
   const onClickCreateWorld = () => {
     createNewGame();
+    setShowMenu(false)
   };
 
   const onClickJoinWorld = () => {
     joinGame();
+    setShowMenu(false)
   };
 
   const handleValueChange = (e) => {
@@ -159,6 +162,39 @@ function App() {
       setTxtgameid(e.target.value);
     }
   };
+
+  const handleKeyDown = (e) => {
+    if (e.code === 'KeyM')
+      setShowMenu(true)
+  }
+
+
+  document.addEventListener("keydown", handleKeyDown);
+
+  const getMenu = () => {
+    return (
+      <>
+        <div>
+          <button
+            css={[menu, ctaBtn]}
+            style={{ marginRight: "10px", marginBottom: "10px" }}
+            onClick={() => onClickCreateWorld()}
+          >
+            Create World
+            </button>
+          <input
+            css={[inputBoxStyle, txtStyle, ctaBtn]}
+            onChange={handleValueChange}
+            placeholder="Enter  world  id "
+            value={copiedId}
+          />
+          <button css={[menu, ctaBtn]} onClick={onClickJoinWorld} disabled={copiedId.length !== 36 ? true : false}>
+            Join World
+            </button>
+        </div>
+      </>
+    )
+  }
 
   const getMenuContent = () => {
     return (
@@ -171,27 +207,8 @@ function App() {
         <button css={hidePlayBtn ? hideBtn : [menu, ctaBtn]} onClick={onPlay}>
           Play
         </button>
-        {hidePlayBtn ? (
-          <div>
-            <button
-              css={[menu, ctaBtn]}
-              style={{ marginRight: "10px", marginBottom: "10px" }}
-              onClick={() => onClickCreateWorld()}
-            >
-              Create World
-            </button>
-            <input
-              css={[inputBoxStyle, txtStyle, ctaBtn]}
-              onChange={handleValueChange}
-              placeholder="Enter  world  id "
-              value={copiedId}
-            />
-            <button css={[menu, ctaBtn]} onClick={onClickJoinWorld}>
-              Join World
-            </button>
-          </div>
-        ) : null}
-      </div>
+        {  hidePlayBtn  ? getMenu() : null}
+       </div>
     );
   };
 
@@ -252,6 +269,14 @@ function App() {
           centerheader
           closeButton
           children={getMenuContent()}
+        />
+        <ModalComponent
+          open={showMenu}
+          onClose={showMenu}
+          headerText="menu"
+          centerheader
+          closeButton
+          children={getMenu()}
         />
       </>
       {showTouchControls ? (
