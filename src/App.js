@@ -13,6 +13,8 @@ import { TouchControls } from "./components/TouchControls";
 import { w3cwebsocket } from "websocket";
 import ModalComponent from "./components/Modal";
 import style from "./style";
+import Close from "./images/close.svg";
+
 
 const client = new w3cwebsocket("ws://localhost:9090");
 // const client = new w3cwebsocket("ws://192.168.1.13:9090");
@@ -41,12 +43,8 @@ function App() {
     txtStyle,
     inputBoxStyle,
     centerAlign,
-    moveUpBtn,
-    moveRightBtn,
-    moveDownBtn,
-    moveLeftBtn,
-    jumpBtn,
-    ctaBtn,
+    yellowTxt,
+    ctaBtn, iconContainer, close
   } = style;
   const menuItems = ["Resume", "Invite Players", "help", "quit"];
 
@@ -103,6 +101,10 @@ function App() {
 
     client.send(JSON.stringify(payLoad));
   };
+
+  const closeMenu = () => {
+    setShowMenu(false)
+  }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const joinGame = () => {
@@ -175,7 +177,6 @@ function App() {
         <div>
           <button
             css={[menu, ctaBtn]}
-            style={{ marginRight: "10px", marginBottom: "10px" }}
             onClick={() => onClickCreateWorld()}
           >
             Create World
@@ -197,7 +198,24 @@ function App() {
   const getJoinBtn  = () => {
     return (
       <>
+        <div css={iconContainer} onClick={closeMenu}>
+          <img src={Close} alt="aClose" css={close} />
+        </div>
+
+        <h1 css={[txtStyle, yellowTxt]}>MENU</h1>
         <div>
+          {txtGameId ? (
+            <div css={centerAlign} style={{ marginBottom: '10px'}}>
+              <div css={[txtStyle, yellowTxt]}>World Id: {txtGameId}</div>
+              <button
+                css={[txtStyle, ctaBtn]} style={{ marginLeft: '10px' }}
+                onClick={() => navigator.clipboard.writeText(txtGameId)}
+              >
+                Copy
+              </button>
+            </div>
+          ) : null}
+
           <input
             css={[inputBoxStyle, txtStyle, ctaBtn]}
             onChange={handleValueChange}
@@ -232,7 +250,7 @@ function App() {
     <>
       <>
         <div>
-          {txtGameId ? (
+          {/* {txtGameId ? (
             <div css={centerAlign}>
               <div css={txtStyle}>World Id: {txtGameId}</div>
               <button
@@ -242,7 +260,7 @@ function App() {
                 Copy
               </button>
             </div>
-          ) : null}
+          ) : null} */}
           <div className="user_number" style={usersNum}>
             {users}
           </div>

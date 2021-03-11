@@ -2,7 +2,8 @@ import { css } from "@emotion/core";
 
 export default {
   menu: css`
-    width: 100%;
+    width: 70%;
+    margin: auto;
     background-color: white;
     padding: 15px;
     border: 2px solid black;
@@ -25,20 +26,34 @@ export default {
     font-size: 30px;
     text-align: center;
     @media (max-width: 450px) {
-      font-size: 20px;
+      font-size: 30px;
     }
+  `,
+  close: css`
+            width: 40px;
+            height: 40px;
+            margin: 10px;
+    `,
+
+  iconContainer: css`
+       display: flex;
+       justify-content: flex-end;
+    `,
+  yellowTxt: css`
+      color: orange;
   `,
   centerAlign: css`
     display: flex;
     justify-content: center;
   `,
   inputBoxStyle: css`
-    width: 80%;
+    width: 60%;
     display: flex;
     margin: auto;
     padding: 10px;
     background-color: white;
     margin-bottom: 10px;
+     margin-top: 10px;
   `,
   btn: css`
     width: 100%;
