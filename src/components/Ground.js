@@ -17,7 +17,7 @@ export const Ground = ({ position, onBlockPlaced }) => {
   ]);
   texture.wrapS = RepeatWrapping;
   texture.wrapT = RepeatWrapping;
-  texture.repeat.set(500, 500);
+  texture.repeat.set(100, 100);
   return (
     <mesh
       ref={ref}
@@ -32,7 +32,7 @@ export const Ground = ({ position, onBlockPlaced }) => {
         addCube(x, y, z, activeTexture);
       }}
     >
-      <planeBufferGeometry attach="geometry" args={[500, 500]} />
+      <planeBufferGeometry attach="geometry" args={[100, 100]} />
       <meshStandardMaterial map={texture} attach="material" />
     </mesh>
   );

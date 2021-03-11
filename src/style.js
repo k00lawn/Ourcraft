@@ -135,4 +135,15 @@ export default {
       align-items: center;
     }
   `,
+
+  removeBtn : css`
+    top: 921px;
+    left: 156px;
+    width: 100%;
+    height: 100%;
+    background-color: grey;
+    border: 3px solid #909090;
+    border-radius: 67px;
+    opacity: 0.86;
+  `,
 };

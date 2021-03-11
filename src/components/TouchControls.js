@@ -23,14 +23,18 @@ export const TouchControls = (isMob) => {
     gameController2,
     box,
     btn,
+    removeBtn,
   } = style;
+  const transition = {
+    "transition" : "1s"}
 
   //OnClickRemoveTouch change background color style to red
 
-  return (
+  return (    
     <>
-      {isMobile
-        ? isMob(true)(
+      {isMobile ?
+         ( 
+          
             <div>
               <div css={gameController}>
                 <div css={box}></div>
@@ -65,7 +69,7 @@ export const TouchControls = (isMob) => {
                 <div css={box}></div>
                 <div css={box}></div>
                 <div css={box}>
-                  <button css={[moveLeftBtn, btn]} name="moveLeft">
+                  <button style={transition} css={[removeBtn]} name="remove">
                     BREAK
                   </button>
                 </div>
@@ -80,7 +84,8 @@ export const TouchControls = (isMob) => {
                 <div css={box}></div>
               </div>
             </div>
-          )
+          ) 
+
         : null}
     </>
   );

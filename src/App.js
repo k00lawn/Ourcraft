@@ -221,14 +221,14 @@ function App() {
             <Crosshair x={x} y={y} />
             <Canvas shadowMap sRGB>
               <Stars
-                radius={500}
-                count={100000}
+                radius={100}
+                count={100}
                 factor={8}
                 saturation={1}
                 // depth={10}
                 fade
               />
-              <Sky sunPosition={[10000, 200, 100]} distance={4500000} />
+              <Sky sunPosition={[1000, 200, 100]} />
               <ambientLight intensity={0.25} />
               <pointLight
                 castShadow
