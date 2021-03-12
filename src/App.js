@@ -16,9 +16,9 @@ import style from "./style";
 import { isMobile } from "react-device-detect";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-// const client = new w3cwebsocket("ws://localhost:9090");
+const client = new w3cwebsocket("ws://localhost:9090");
 // const client = new w3cwebsocket("ws://192.168.1.13:9090");
-const client = new w3cwebsocket("ws://192.168.1.42:9090");
+// const client = new w3cwebsocket("ws://192.168.1.42:9090");
 
 function App() {
   const [{ x, y }] = useState({
