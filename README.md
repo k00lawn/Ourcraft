@@ -52,15 +52,15 @@ open `localhost:3000` in your browser
 
 ### Mobile/Tablet
 
-`Directional arrows` to move around
+`Directional Arrows` to move around
 
-`Click anywhere on the ground or blocks` to place blocks
+`Tap anywhere on the ground or blocks` to place blocks
 
 `Toggle break block button` to destroy blocks
 
 `Jump button` to jump
 
-`click on the hud` to switch between blocks
+`Tap on the hud` to switch between blocks
 
 Have fun creating your own world :D
 
