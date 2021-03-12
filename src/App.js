@@ -15,6 +15,7 @@ import ModalComponent from "./components/Modal";
 import style from "./style";
 import { isMobile } from "react-device-detect";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 // const client = new w3cwebsocket("ws://localhost:9090");
 // const client = new w3cwebsocket("ws://192.168.1.13:9090");
@@ -37,6 +38,7 @@ function App() {
   const [showMenu, setShowMenu] = useState(false);
   const [users, setUsers] = useState(1);
   const { menu, hideBtn, txtStyle, inputBoxStyle, centerAlign, ctaBtn } = style;
+  const handle = useFullScreenHandle();
   // const menuItems = ["Resume", "Invite Players", "help", "quit"];
 
   const usersNum = {
@@ -138,9 +140,11 @@ function App() {
   const onClickCreateWorld = () => {
     createNewGame();
     setShowMenu(false);
+    handle.enter();
   };
 
   const onClickJoinWorld = () => {
+    handle.enter();
     joinGame();
     setShowMenu(false);
   };
@@ -205,71 +209,79 @@ function App() {
   };
 
   return (
-    <>
+    <FullScreen handle={handle}>
       <>
-        <div>
-          {txtGameId ? (
-            <div css={centerAlign}>
-              <div css={txtStyle}>World Id: {txtGameId}</div>
-              <CopyToClipboard text={txtGameId}>
-                <button css={[txtStyle, ctaBtn]}>Copy</button>
-              </CopyToClipboard>
+        <>
+          <div>
+            {txtGameId ? (
+              <div css={centerAlign}>
+                <div css={txtStyle}>World Id: {txtGameId}</div>
+                <CopyToClipboard text={txtGameId}>
+                  <button css={[txtStyle, ctaBtn]}>Copy</button>
+                </CopyToClipboard>
+              </div>
+            ) : null}
+            <div className="user_number" style={usersNum}>
+              {users}
             </div>
-          ) : null}
-          <div className="user_number" style={usersNum}>
-            {users}
           </div>
-        </div>
-      </>
-      <>
-        {txtGameId ? (
-          <>
-            <Crosshair x={x} y={y} />
-            <Canvas shadowMap sRGB>
-              <Stars
-                radius={100}
-                count={100}
-                factor={8}
-                saturation={1}
-                // depth={10}
-                fade
-              />
-              <Sky sunPosition={[1000, 200, 100]} />
-              <ambientLight intensity={0.25} />
-              <pointLight
-                castShadow
-                intensity={0.7}
-                position={[100, 100, 100]}
-              />
-              <Hud position={[0, 1.1, -2]} isMobile={isMobile} />
-              <Physics gravity={[0, -30, 0]}>
-                <Ground position={[0, 0.5, 0]} onBlockPlaced={onBlockPlaced} />
-                <Player position={[0, 3, 10]} isMobile={isMobile} />
-                <Cubes onBlockPlaced={onBlockPlaced} cubesState={cubesState} />
-              </Physics>
-            </Canvas>
-          </>
-        ) : null}
+        </>
+        <>
+          {txtGameId ? (
+            <>
+              <Crosshair x={x} y={y} />
+              <Canvas shadowMap sRGB>
+                <Stars
+                  radius={100}
+                  count={100}
+                  factor={8}
+                  saturation={1}
+                  // depth={10}
+                  fade
+                />
+                <Sky sunPosition={[1000, 200, 100]} />
+                <ambientLight intensity={0.25} />
+                <pointLight
+                  castShadow
+                  intensity={0.7}
+                  position={[100, 100, 100]}
+                />
+                <Hud position={[0, 1.1, -2]} isMobile={isMobile} />
+                <Physics gravity={[0, -30, 0]}>
+                  <Ground
+                    position={[0, 0.5, 0]}
+                    onBlockPlaced={onBlockPlaced}
+                  />
+                  <Player position={[0, 3, 10]} isMobile={isMobile} />
+                  <Cubes
+                    onBlockPlaced={onBlockPlaced}
+                    cubesState={cubesState}
+                  />
+                </Physics>
+              </Canvas>
+            </>
+          ) : null}
 
-        <ModalComponent
-          open={showModal}
-          onClose={showModal}
-          headerText="menu"
-          centerheader
-          closeButton
-          children={getMenuContent()}
-        />
-        <ModalComponent
-          open={showMenu}
-          onClose={showMenu}
-          headerText="menu"
-          centerheader
-          closeButton
-          children={getMenu()}
-        />
+          <ModalComponent
+            open={showModal}
+            onClose={showModal}
+            headerText="menu"
+            centerheader
+            closeButton
+            children={getMenuContent()}
+          />
+          <ModalComponent
+            open={showMenu}
+            onClose={showMenu}
+            headerText="menu"
+            centerheader
+            closeButton
+            children={getMenu()}
+          />
+        </>
+        {showTouchControls && <TouchControls isMobile={isMobile} />}
       </>
-      {showTouchControls && <TouchControls isMobile={isMobile} />}
-    </>
+    </FullScreen>
   );
 }
 
