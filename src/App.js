@@ -14,6 +14,7 @@ import { w3cwebsocket } from "websocket";
 import ModalComponent from "./components/Modal";
 import style from "./style";
 import { isMobile } from "react-device-detect";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 // const client = new w3cwebsocket("ws://localhost:9090");
 // const client = new w3cwebsocket("ws://192.168.1.13:9090");
@@ -36,7 +37,7 @@ function App() {
   const [showMenu, setShowMenu] = useState(false);
   const [users, setUsers] = useState(1);
   const { menu, hideBtn, txtStyle, inputBoxStyle, centerAlign, ctaBtn } = style;
-  const menuItems = ["Resume", "Invite Players", "help", "quit"];
+  // const menuItems = ["Resume", "Invite Players", "help", "quit"];
 
   const usersNum = {
     width: "30px",
@@ -210,12 +211,9 @@ function App() {
           {txtGameId ? (
             <div css={centerAlign}>
               <div css={txtStyle}>World Id: {txtGameId}</div>
-              <button
-                css={[txtStyle, ctaBtn]}
-                onClick={() => navigator.clipboard.writeText(txtGameId)}
-              >
-                Copy
-              </button>
+              <CopyToClipboard text={txtGameId}>
+                <button css={[txtStyle, ctaBtn]}>Copy</button>
+              </CopyToClipboard>
             </div>
           ) : null}
           <div className="user_number" style={usersNum}>
