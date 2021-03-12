@@ -14,40 +14,57 @@ Copy the repository link
 
 In your terminal enter,
 
-```git clone https://github.com/k00lawn/Ourcraft```
+`git clone https://github.com/k00lawn/Ourcraft`
 
 then change directory,
 
-```cd Ourcraft```
+`cd Ourcraft`
 
 install dependencies,
 
-```npm install```
+`npm install`
 
 start the client server,
 
-```npm start```
+`npm start`
 
 start the backend server in another terminal,
 
-```nodemon server/server.js```
+`nodemon server/server.js`
 
-open ```localhost:3000``` in your browser
+open `localhost:3000` in your browser
 
 ## How to play
 
-```WASD``` to move around
+### PC
 
-```Left Mouse Button``` to place blocks
+`WASD` to move around
 
-```Alt + Left Mouse button``` to destroy blocks
+`Left Mouse Button` to place blocks
 
-```Spacebar``` to jump
+`Alt(hold) + Left Mouse button` to destroy blocks
 
-```1 2 3 4 5 6 7``` to switch between blocks
+`Spacebar` to jump
+
+`1 2 3 4 5 6 7` to switch between blocks
+
+`P` to look around again
+
+### Mobile/Tablet
+
+`Directional arrows` to move around
+
+`Click anywhere on the ground or blocks` to place blocks
+
+`Toggle break block button` to destroy blocks
+
+`Jump button` to jump
+
+`click on the hud` to switch between blocks
 
 Have fun creating your own world :D
 
 # Screenshots
-![Glass house](https://github.com/k00lawn/Ourcraft/blob/main/assets/ourhouse.png)
 
+![Glass house](https://github.com/k00lawn/Ourcraft/blob/main/assets/ourhouse.png)
+![Made By Team BARK](https://github.com/k00lawn/Ourcraft/blob/main/assets/bark.gif)
