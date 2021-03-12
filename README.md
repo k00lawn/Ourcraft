@@ -68,3 +68,4 @@ Have fun creating your own world :D
 
 ![Glass house](https://github.com/k00lawn/Ourcraft/blob/main/assets/ourhouse.png)
 ![Made By Team BARK](https://github.com/k00lawn/Ourcraft/blob/main/assets/bark.gif)
+![Skyscraper](https://github.com/k00lawn/Ourcraft/blob/main/assets/skyscraper.gif)
