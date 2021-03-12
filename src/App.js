@@ -13,6 +13,7 @@ import { TouchControls } from "./components/TouchControls";
 import { w3cwebsocket } from "websocket";
 import ModalComponent from "./components/Modal";
 import style from "./style";
+import { isMobile } from "react-device-detect";
 
 // const client = new w3cwebsocket("ws://localhost:9090");
 // const client = new w3cwebsocket("ws://192.168.1.13:9090");
@@ -31,7 +32,6 @@ function App() {
   const [showModal, setShowModal] = useState(true);
   const [hidePlayBtn, setHidePlayBtn] = useState(false);
   const [copiedId, setcopiedId] = useState("");
-  const [isMobile, setIsMobile] = useState(false);
   const [showTouchControls, setShowTouchControls] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
   const [users, setUsers] = useState(1);
@@ -203,11 +203,6 @@ function App() {
     );
   };
 
-  const checkIsMobile = () => {
-    console.log("check mob func is called");
-    // setIsMobile(true)
-  };
-
   return (
     <>
       <>
@@ -232,7 +227,6 @@ function App() {
         {txtGameId ? (
           <>
             <Crosshair x={x} y={y} />
-            {showTouchControls ? <TouchControls isMob={checkIsMobile} /> : null}
             <Canvas shadowMap sRGB>
               <Stars
                 radius={100}
@@ -276,7 +270,7 @@ function App() {
           children={getMenu()}
         />
       </>
-      {/* <TouchControls isMob={checkIsMobile} /> */}
+      {showTouchControls && <TouchControls isMobile={isMobile} />}
     </>
   );
 }

@@ -9,9 +9,8 @@ import {
   BiLeftArrow,
 } from "react-icons/bi";
 import { ImRadioUnchecked } from "react-icons/im";
-import { isMobile } from "react-device-detect";
 
-export const TouchControls = ({ isMob }) => {
+export const TouchControls = ({ isMobile }) => {
   const {
     moveRightBtn,
     moveDownBtn,
@@ -31,13 +30,9 @@ export const TouchControls = ({ isMob }) => {
 
   //OnClickRemoveTouch change background color style to red
 
-  const mobile = isMobile;
-
-  !mobile ? console.log("") : isMob();
-
   return (
     <>
-      {mobile ? (
+      {isMobile ? (
         <div>
           <div css={gameController}>
             <div css={box}></div>
